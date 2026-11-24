@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Démo · Gold Nord × BFMTV · Metatrend</title><style>html,body{margin:0;padding:0;background:#15120e}</style></head><body><div style="background:#f0dc9a;color:#15120e;font:600 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center;padding:8px 12px">Démo Metatrend pour Gold Nord · Campagne météo BFMTV (30/11 – 04/12) · page de test : aucune donnée n’est envoyée</div><!-- ============================================================
   GOLD NORD × BFMTV — Page de campagne « Météo S49 » (M11-goldnord-84)
-  Version : V1.3 · 24/11/2026 · Metatrend (chiffres clés Noir & Or + page de remerciement + réseaux sociaux)
+  Version : V1.4 · 24/11/2026 · Metatrend (formulaire : l’étape 2 s’affiche comme une nouvelle page)
   À coller dans WordPress : bloc « HTML personnalisé » (ou widget HTML Elementor)
   sur une page vide (ex. goldnord.fr/bfmtv). Aucun fichier externe, aucune librairie.
   Tout est isolé : identifiant #gn84 et classes gn84-* (ne touche pas au thème).
@@ -70,9 +70,31 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 #gn84 .gn84-card{background:var(--gn84-white);color:var(--gn84-ink);border-radius:20px;padding:22px;box-shadow:0 18px 50px rgba(0,0,0,.25);max-width:520px;margin:0 auto}
 #gn84 .gn84-card h3{font-size:21px;font-weight:800;margin-bottom:4px}
 #gn84 .gn84-card .gn84-note{font-size:14px;color:#6b665f;margin-bottom:16px}
-#gn84 .gn84-progress{display:flex;gap:6px;margin-bottom:14px}
-#gn84 .gn84-progress i{flex:1;height:4px;border-radius:4px;background:#ebe5da}
-#gn84 .gn84-progress i.gn84-on{background:var(--gn84-gold)}
+#gn84 .gn84-progress{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+#gn84 .gn84-sp{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#8b8680;white-space:nowrap}
+#gn84 .gn84-sp b{width:26px;height:26px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid #d9d1c3;background:#fff;color:#8b8680;font-size:13px;transition:all .25s ease}
+#gn84 .gn84-sp1{color:var(--gn84-ink)}
+#gn84 .gn84-sp1 b{background:var(--gn84-ink);border-color:var(--gn84-ink);color:var(--gn84-gold)}
+#gn84 .gn84-sline{flex:1;min-width:14px;height:2px;border-radius:2px;background:#ebe5da;transition:background .25s ease}
+#gn84 .gn84-at2 .gn84-sp1{color:#8a7a52}
+#gn84 .gn84-at2 .gn84-sp1 b{background:var(--gn84-gold);border-color:var(--gn84-gold);color:#15120e;font-size:0}
+#gn84 .gn84-at2 .gn84-sp1 b::after{content:"✓";font-size:14px;font-weight:800}
+#gn84 .gn84-at2 .gn84-sline{background:var(--gn84-gold)}
+#gn84 .gn84-at2 .gn84-sp2{color:var(--gn84-ink)}
+#gn84 .gn84-at2 .gn84-sp2 b{background:var(--gn84-ink);border-color:var(--gn84-ink);color:var(--gn84-gold)}
+#gn84 .gn84-card.gn84-at2{background:#f6f1e6;transition:background .25s ease}
+#gn84 .gn84-s2head{display:flex;align-items:center;gap:12px;margin:0 0 12px;padding:16px;border-radius:14px;background:radial-gradient(120% 120% at 100% 0%,#2e251a 0%,#15120e 70%);color:var(--gn84-white);border:1px solid rgba(212,175,55,.35)}
+#gn84 .gn84-s2head h3{color:var(--gn84-white);margin:0;font-size:20px}
+#gn84 .gn84-s2i{width:44px;height:44px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,175,55,.5);background:rgba(212,175,55,.1);color:var(--gn84-gold)}
+#gn84 .gn84-s2k{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gn84-gold);margin-bottom:2px}
+#gn84 .gn84-recap{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding:10px 12px;border-radius:12px;background:#fff;border:1px solid rgba(212,175,55,.45);font-size:14px;color:#3d3832}
+#gn84 .gn84-recap svg{flex:none}
+#gn84 .gn84-recap-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#gn84 .gn84-back2{background:none;border:0;padding:0;color:#8a6a1a;font-weight:700;font-size:13px;text-decoration:underline;cursor:pointer;flex:none}
+#gn84 .gn84-in{animation:gn84slide .32s cubic-bezier(.2,.8,.2,1)}
+#gn84 .gn84-inb{animation:gn84slideb .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes gn84slide{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:none}}
+@keyframes gn84slideb{from{opacity:0;transform:translateX(-32px)}to{opacity:1;transform:none}}
 #gn84 .gn84-f{display:block;margin-bottom:12px}
 #gn84 .gn84-f span{display:block;font-size:14px;font-weight:700;margin-bottom:5px}
 #gn84 .gn84-f input,#gn84 .gn84-f select{display:block;width:100%;height:52px;padding:0 14px;border:1.5px solid #d9d1c3;border-radius:12px;background:#fff;font-size:17px;outline:none;box-shadow:none}
@@ -82,7 +104,7 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 #gn84 .gn84-f.gn84-err em{display:block}
 #gn84 .gn84-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 #gn84 .gn84-pay{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-#gn84 .gn84-pay label{display:flex;align-items:center;gap:8px;border:1.5px solid #d9d1c3;border-radius:12px;padding:12px;font-size:15px;cursor:pointer}
+#gn84 .gn84-pay label{background:#fff;display:flex;align-items:center;gap:8px;border:1.5px solid #d9d1c3;border-radius:12px;padding:12px;font-size:15px;cursor:pointer}
 #gn84 .gn84-pay input{accent-color:#c9a03a;width:18px;height:18px}
 #gn84 .gn84-consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#5d5852;margin:6px 0 14px;cursor:pointer}
 #gn84 .gn84-consent input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:#c9a03a}
@@ -312,7 +334,7 @@ function logoHtml(){return '<span class="gn84-logo">'+(C.logoUrl?'<img src="'+es
 function formHtml(id){return ''+
 '<div class="gn84-card"><form class="gn84-form" id="'+id+'" novalidate>'+
 (C.endpoint?'':'<div class="gn84-test">MODE TEST : aucune donnée n’est envoyée tant que l’adresse d’envoi (endpoint) n’est pas réglée.</div>')+
-'<div class="gn84-progress"><i class="gn84-on"></i><i></i></div>'+
+'<div class="gn84-progress"><span class="gn84-sp gn84-sp1"><b>1</b>Vos coordonnées</span><i class="gn84-sline"></i><span class="gn84-sp gn84-sp2"><b>2</b>Livraison</span></div>'+
 '<div class="gn84-s1">'+
 '<h3>Votre kit postal gratuit</h3><p class="gn84-note">Reçu chez vous, sans frais et sans engagement.</p>'+
 '<label class="gn84-f"><span>Prénom</span><input name="prenom" autocomplete="given-name" required><em>Indiquez votre prénom.</em></label>'+
@@ -324,7 +346,8 @@ function formHtml(id){return ''+
 '<p class="gn84-small">Étape 1 sur 2 · 30 secondes</p>'+
 '</div>'+
 '<div class="gn84-s2" hidden>'+
-'<h3>Où envoyer votre kit ?</h3><p class="gn84-note">Dernière étape : l’adresse de livraison.</p>'+
+'<div class="gn84-s2head"><span class="gn84-s2i">'+I.kit+'</span><div><p class="gn84-s2k">Étape 2 sur 2 · Livraison</p><h3>Où envoyer votre kit&nbsp;?</h3></div></div>'+
+'<div class="gn84-recap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a03a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="gn84-recap-t"></span><button type="button" class="gn84-back2">Modifier</button></div>'+
 '<label class="gn84-f"><span>Nom</span><input name="nom" autocomplete="family-name" required><em>Indiquez votre nom.</em></label>'+
 '<label class="gn84-f"><span>Adresse</span><input name="adresse" autocomplete="address-line1" required><em>Indiquez votre adresse.</em></label>'+
 '<label class="gn84-f"><span>Complément (facultatif)</span><input name="complement" autocomplete="address-line2"></label>'+
@@ -492,20 +515,23 @@ d.code_postal_livraison=d.code_postal_2;delete d.code_postal_2;for(var k in utm)
 function send(d){if(!C.endpoint)return Promise.resolve({test:true});var opt={method:"POST",credentials:"same-origin"};
 if(C.endpointFormat==="json"){opt.headers={"Content-Type":"application/json"};opt.body=JSON.stringify(d)}else{var fd=new FormData();for(var k in d)fd.append(k,d[k]);opt.body=fd}
 return fetch(C.endpoint,opt).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r})}
-$$(".gn84-form").forEach(function(form){var s1=$(".gn84-s1",form),s2=$(".gn84-s2",form),ok=$(".gn84-ok",form),bars=$$(".gn84-progress i",form),busy=false;
+$$(".gn84-form").forEach(function(form){var s1=$(".gn84-s1",form),s2=$(".gn84-s2",form),ok=$(".gn84-ok",form),busy=false;
+function go(n){var card=form.parentNode,show=n===2?s2:s1,hide=n===2?s1:s2;form.classList.toggle("gn84-at2",n===2);card.classList.toggle("gn84-at2",n===2);hide.hidden=true;show.hidden=false;show.classList.remove("gn84-in","gn84-inb");void show.offsetWidth;show.classList.add(n===2?"gn84-in":"gn84-inb");
+var dlg=form.closest(".gn84-dialog");if(dlg){dlg.scrollTop=0}else{var r=card.getBoundingClientRect();if(r.top<0)card.scrollIntoView({behavior:"smooth",block:"start"})}}
 form.elements.code_postal.addEventListener("input",function(){this.value=this.value.replace(/\D/g,"").slice(0,5)});
 form.elements.code_postal_2.addEventListener("input",function(){this.value=this.value.replace(/\D/g,"").slice(0,5)});
 $(".gn84-next",form).addEventListener("click",function(){var c=form.elements.consentement,cw=c.closest(".gn84-consent");if(!check(form,["prenom","telephone","email","code_postal"]))return;
 if(!c.checked){cw.classList.add("gn84-err");c.focus();return}cw.classList.remove("gn84-err");
 if(!form.elements.code_postal_2.value)form.elements.code_postal_2.value=form.elements.code_postal.value;
-s1.hidden=true;s2.hidden=false;bars[1].classList.add("gn84-on");form.elements.nom.focus();
+var rc=[form.elements.prenom.value.trim(),form.elements.telephone.value.trim()].filter(Boolean).join(" · ");$(".gn84-recap-t",form).textContent=rc;
+go(2);setTimeout(function(){form.elements.nom.focus({preventScroll:true})},340);
 track(C.events.step1,{});if(C.sendPartial){var p=data(form);p.etape="1_partielle";send(p).catch(function(){})}});
-$(".gn84-back",form).addEventListener("click",function(){s2.hidden=true;s1.hidden=false;bars[1].classList.remove("gn84-on")});
+$$(".gn84-back,.gn84-back2",form).forEach(function(b){b.addEventListener("click",function(){go(1)})});
 form.addEventListener("submit",function(e){e.preventDefault();if(busy)return;if(!check(form,["nom","adresse","code_postal_2","ville"]))return;
 if(form.elements.site_web.value)return; /* anti-spam */
 var d=data(form);d.etape="2_complete";var id=eid();d.event_id=id;var btn=form.querySelector("button[type=submit]");busy=true;btn.disabled=true;btn.style.opacity=".7";
 send(d).then(function(){store("gn84_prenom",d.prenom||"");store("gn84_lead","1");track(C.events.lead,{method:"kit_postal",form:form.id},C.events.fbLead,false,id);
-if(C.thankYouUrl){location.href=C.thankYouUrl;return}s2.hidden=true;$(".gn84-progress",form).hidden=true;ok.hidden=false;
+if(C.thankYouUrl){location.href=C.thankYouUrl;return}s2.hidden=true;$(".gn84-progress",form).hidden=true;form.parentNode.classList.remove("gn84-at2");ok.hidden=false;
 $$(".gn84-form").forEach(function(f){if(f!==form){$(".gn84-s1",f).hidden=true;$(".gn84-s2",f).hidden=true;$(".gn84-progress",f).hidden=true;$(".gn84-ok",f).hidden=false}})})
 .catch(function(){busy=false;btn.disabled=false;btn.style.opacity="";alert("Désolé, l’envoi n’a pas abouti. Réessayez ou appelez le "+C.phone+".")})})});
 /* ---- Chiffres clés : compteur ---- */
@@ -519,5 +545,6 @@ var sticky=$(".gn84-sticky"),hero=$(".gn84-hero");
 function onScroll(){var r=hero.getBoundingClientRect();sticky.classList.toggle("gn84-show",r.bottom<0)}window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 })();
 </script>
+
 
 </body></html>
