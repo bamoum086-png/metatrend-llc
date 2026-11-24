@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Démo · Gold Nord × BFMTV · Metatrend</title><style>html,body{margin:0;padding:0;background:#15120e}</style></head><body><div style="background:#f0dc9a;color:#15120e;font:600 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center;padding:8px 12px">Démo Metatrend pour Gold Nord · Campagne météo BFMTV (30/11 – 04/12) · les demandes de test arrivent dans le tableau Gold Nord</div><!-- ============================================================
   GOLD NORD × BFMTV — Page de campagne « Météo S49 » (M11-goldnord-84)
-  Version : V1.8 · 24/11/2026 · calculatrice « Estimer mon or » (tarifs Gold Nord) + menu latéral · demandes → Google Sheets · 15 agences · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
+  Version : V1.9 · 24/11/2026 · bouton « Estimer mon or » plus visible · calculatrice « Estimer mon or » (tarifs Gold Nord) + menu latéral · demandes → Google Sheets · 15 agences · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
   À coller dans WordPress : bloc « HTML personnalisé » (ou widget HTML Elementor)
   sur une page vide (ex. goldnord.fr/bfmtv). Aucun fichier externe, aucune librairie.
   Tout est isolé : identifiant #gn84 et classes gn84-* (ne touche pas au thème).
@@ -252,9 +252,14 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 #gn84 .gn84-calc-link:hover{background:rgba(212,175,55,.16)}
 #gn84 .gn84-s1head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:16px}
 #gn84 .gn84-s1head .gn84-note{margin-bottom:0}
-@media (max-width:520px){#gn84 .gn84-s1head{flex-direction:column;gap:10px}#gn84 .gn84-calc-pill{align-self:flex-start}}
-#gn84 .gn84-calc-pill{flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border-radius:999px;border:1.5px solid var(--gn84-gold2);background:#fff;color:#6b5113;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
-#gn84 .gn84-calc-pill:hover{background:#fbf3dc}
+#gn84 .gn84-s1head{flex-direction:column;gap:14px}#gn84 .gn84-s1head .gn84-calc-pill{align-self:stretch;justify-content:flex-start;min-height:52px;font-size:15px}#gn84 .gn84-s1head .gn84-calc-pill em{margin-left:auto;margin-right:6px}#gn84 .gn84-calc-pill small{font-weight:600;color:#cbbf9f;font-size:12.5px;margin-left:-2px}
+@media (max-width:440px){#gn84 .gn84-calc-pill small{display:none}}
+#gn84 .gn84-calc-pill{position:relative;overflow:hidden;flex:none;display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:6px 16px 6px 6px;border-radius:999px;border:1.5px solid var(--gn84-gold);background:linear-gradient(135deg,#15120e 0%,#2e251a 100%);color:var(--gn84-goldlt);font-size:14px;font-weight:800;letter-spacing:.01em;cursor:pointer;white-space:nowrap;box-shadow:0 8px 20px rgba(212,175,55,.32),0 0 0 4px rgba(212,175,55,.12);transition:transform .15s ease,box-shadow .15s ease}
+#gn84 .gn84-calc-pill i{flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#f0d77a,#c9a03a);color:#15120e;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+#gn84 .gn84-calc-pill em{font-style:normal;color:var(--gn84-gold);font-size:16px;margin-left:2px}
+#gn84 .gn84-calc-pill::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,236,170,.28),transparent);transform:skewX(-20deg);animation:gn84shine 3.2s ease-in-out infinite}
+#gn84 .gn84-calc-pill:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(212,175,55,.42),0 0 0 4px rgba(212,175,55,.18)}
+@keyframes gn84shine{0%,55%{left:-60%}100%{left:130%}}
 #gn84 .gn84-sticky{grid-template-columns:1fr auto auto}
 /* ---------- CALCULATRICE ---------- */
 #gn84 .gn84-calcm{position:fixed;inset:0;z-index:99999;display:none;align-items:flex-end;justify-content:center;background:rgba(10,8,6,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
@@ -439,7 +444,7 @@ function formHtml(id,o){o=o||{};return ''+
 (C.endpoint?'':'<div class="gn84-test">MODE TEST : aucune donnée n’est envoyée tant que l’adresse d’envoi (endpoint) n’est pas réglée.</div>')+
 '<div class="gn84-progress"><span class="gn84-sp gn84-sp1"><b>1</b>Vos coordonnées</span><i class="gn84-sline"></i><span class="gn84-sp gn84-sp2"><b>2</b>Livraison</span></div>'+
 '<div class="gn84-s1">'+
-(o.noCalc?'<h3>Votre kit postal gratuit</h3><p class="gn84-note">Reçu chez vous, sans frais et sans engagement.</p>':'<div class="gn84-s1head"><div><h3>Votre kit postal gratuit</h3><p class="gn84-note">Reçu chez vous, sans frais et sans engagement.</p></div><button type="button" class="gn84-calc-pill" data-gn84="calc" data-gn84-pos="formulaire">'+I.calc+' Estimer mon or</button></div>')+
+(o.noCalc?'<h3>Votre kit postal gratuit</h3><p class="gn84-note">Reçu chez vous, sans frais et sans engagement.</p>':'<div class="gn84-s1head"><div><h3>Votre kit postal gratuit</h3><p class="gn84-note">Reçu chez vous, sans frais et sans engagement.</p></div><button type="button" class="gn84-calc-pill" data-gn84="calc" data-gn84-pos="formulaire"><i>'+I.calc+'</i>Estimer mon or<small>· en 30 secondes</small><em aria-hidden="true">→</em></button></div>')+
 '<div class="gn84-row2"><label class="gn84-f"><span>Prénom</span><input name="prenom" autocomplete="given-name" required><em>Indiquez votre prénom.</em></label>'+
 '<label class="gn84-f"><span>Nom</span><input name="nom" autocomplete="family-name" required><em>Indiquez votre nom.</em></label></div>'+
 '<label class="gn84-f"><span>E-mail</span><input name="email" type="email" inputmode="email" autocomplete="email" required><em>Adresse e-mail invalide.</em></label>'+
@@ -708,6 +713,7 @@ var sticky=$(".gn84-sticky"),hero=$(".gn84-hero");
 function onScroll(){var r=hero.getBoundingClientRect();sticky.classList.toggle("gn84-show",r.bottom<0)}window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 })();
 </script>
+
 
 
 
