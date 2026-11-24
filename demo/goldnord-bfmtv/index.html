@@ -1,6 +1,6 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Démo · Gold Nord × BFMTV · Metatrend</title><style>html,body{margin:0;padding:0;background:#15120e}</style></head><body><div style="background:#f0dc9a;color:#15120e;font:600 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center;padding:8px 12px">Démo Metatrend pour Gold Nord · Campagne météo BFMTV (30/11 – 04/12) · page de test : aucune donnée n’est envoyée</div><!-- ============================================================
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Démo · Gold Nord × BFMTV · Metatrend</title><style>html,body{margin:0;padding:0;background:#15120e}</style></head><body><div style="background:#f0dc9a;color:#15120e;font:600 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center;padding:8px 12px">Démo Metatrend pour Gold Nord · Campagne météo BFMTV (30/11 – 04/12) · les demandes de test arrivent dans le tableau Gold Nord</div><!-- ============================================================
   GOLD NORD × BFMTV — Page de campagne « Météo S49 » (M11-goldnord-84)
-  Version : V1.6 · 24/11/2026 · agence d’Aurillac retirée (15 agences) · base V1.5 · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
+  Version : V1.7 · 24/11/2026 · demandes reliées au tableau Google Sheets « Gold Nord – Demandes kit BFMTV » · 15 agences · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
   À coller dans WordPress : bloc « HTML personnalisé » (ou widget HTML Elementor)
   sur une page vide (ex. goldnord.fr/bfmtv). Aucun fichier externe, aucune librairie.
   Tout est isolé : identifiant #gn84 et classes gn84-* (ne touche pas au thème).
@@ -252,7 +252,7 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 /* ================= RÉGLAGES (à compléter avec Gold Nord / RERP) ================= */
 var GN84_CONFIG = {
   /* Où envoyer la demande de kit. Vide = MODE TEST (rien n'est envoyé, un bandeau l'indique). */
-  endpoint: "",                    /* ex. "https://goldnord.fr/wp-json/..." ou URL du CRM RERP */
+  endpoint: "https://script.google.com/macros/s/AKfycbyfN3goo3O-L5Z82wiR8KRTdSwiHsZBdFjhiF0Lkg9x0uExDlHWgKBruhxyjVH603Uuig/exec", /* tableau Google Sheets « Gold Nord – Demandes kit BFMTV » (vide = MODE TEST) */
   endpointFormat: "form",          /* "form" (multipart, compatible WordPress/CF7) ou "json" */
   extraFields: {},                 /* champs fixes ajoutés à chaque envoi, ex. {"_wpcf7":"123"} */
   sendPartial: false,              /* true = envoyer aussi l'étape 1 (prénom, tél, e-mail, CP) */
@@ -508,7 +508,7 @@ function data(form){var d={};$$("input",form).forEach(function(i){if(i.type==="r
 d.code_postal_livraison=d.code_postal||"";for(var k in utm)d[k]=utm[k];d.source="landing_bfmtv_meteo_s49";d.page=location.href.split("#")[0];d.date=new Date().toISOString();for(var x in C.extraFields)d[x]=C.extraFields[x];return d}
 function send(d){if(!C.endpoint)return Promise.resolve({test:true});var opt={method:"POST",credentials:"same-origin"};
 if(C.endpointFormat==="json"){opt.headers={"Content-Type":"application/json"};opt.body=JSON.stringify(d)}else{var fd=new FormData();for(var k in d)fd.append(k,d[k]);opt.body=fd}
-return fetch(C.endpoint,opt).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r})}
+return fetch(C.endpoint,opt).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text().then(function(t){var j=null;try{j=JSON.parse(t)}catch(e){}if(j&&j.ok===false)throw new Error(j.error||"refus");return r})})}
 $$(".gn84-form").forEach(function(form){var s1=$(".gn84-s1",form),s2=$(".gn84-s2",form),ok=$(".gn84-ok",form),busy=false;
 function go(n){var card=form.parentNode,show=n===2?s2:s1,hide=n===2?s1:s2;form.classList.toggle("gn84-at2",n===2);card.classList.toggle("gn84-at2",n===2);hide.hidden=true;show.hidden=false;show.classList.remove("gn84-in","gn84-inb");void show.offsetWidth;show.classList.add(n===2?"gn84-in":"gn84-inb");
 var dlg=form.closest(".gn84-dialog");if(dlg){dlg.scrollTop=0}else{var r=card.getBoundingClientRect();if(r.top<0)card.scrollIntoView({behavior:"smooth",block:"start"})}}
@@ -524,7 +524,7 @@ form.addEventListener("submit",function(e){e.preventDefault();if(busy)return;if(
 if(form.elements.site_web.value)return; /* anti-spam */
 var d=data(form);d.etape="2_complete";var id=eid();d.event_id=id;var btn=form.querySelector("button[type=submit]");busy=true;btn.disabled=true;btn.style.opacity=".7";
 send(d).then(function(){store("gn84_prenom",d.prenom||"");store("gn84_lead","1");track(C.events.lead,{method:"kit_postal",form:form.id},C.events.fbLead,false,id);
-if(C.thankYouUrl){location.href=C.thankYouUrl;return}s2.hidden=true;$(".gn84-progress",form).hidden=true;form.parentNode.classList.remove("gn84-at2");ok.hidden=false;
+if(C.thankYouUrl&&C.endpoint){location.href=C.thankYouUrl;return}s2.hidden=true;$(".gn84-progress",form).hidden=true;form.parentNode.classList.remove("gn84-at2");ok.hidden=false;
 $$(".gn84-form").forEach(function(f){if(f!==form){$(".gn84-s1",f).hidden=true;$(".gn84-s2",f).hidden=true;$(".gn84-progress",f).hidden=true;$(".gn84-ok",f).hidden=false}})})
 .catch(function(){busy=false;btn.disabled=false;btn.style.opacity="";alert("Désolé, l’envoi n’a pas abouti. Réessayez ou appelez le "+C.phone+".")})})});
 /* ---- Chiffres clés : compteur ---- */
@@ -538,6 +538,7 @@ var sticky=$(".gn84-sticky"),hero=$(".gn84-hero");
 function onScroll(){var r=hero.getBoundingClientRect();sticky.classList.toggle("gn84-show",r.bottom<0)}window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 })();
 </script>
+
 
 
 
