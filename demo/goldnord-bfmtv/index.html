@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Démo · Gold Nord × BFMTV · Metatrend</title><style>html,body{margin:0;padding:0;background:#15120e}</style></head><body><div style="background:#f0dc9a;color:#15120e;font:600 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center;padding:8px 12px">Démo Metatrend pour Gold Nord · Campagne météo BFMTV (30/11 – 04/12) · page de test : aucune donnée n’est envoyée</div><!-- ============================================================
   GOLD NORD × BFMTV — Page de campagne « Météo S49 » (M11-goldnord-84)
-  Version : V1.5 · 24/11/2026 · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
+  Version : V1.6 · 24/11/2026 · agence d’Aurillac retirée (15 agences) · base V1.5 · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
   À coller dans WordPress : bloc « HTML personnalisé » (ou widget HTML Elementor)
   sur une page vide (ex. goldnord.fr/bfmtv). Aucun fichier externe, aucune librairie.
   Tout est isolé : identifiant #gn84 et classes gn84-* (ne touche pas au thème).
@@ -276,7 +276,6 @@ var GN84_CONFIG = {
 };
 /* ================= AGENCES (source : goldnord.fr/contact, lue le 24/11/2026) ================= */
 var GN84_AGENCIES = [
- {c:"Aurillac",a:"23 avenue de la République, 15000 Aurillac",t:"09 82 57 94 26",h:"Lun 14h–18h · Mar–Ven 9h–12h / 14h–18h · Sam 9h–12h",d:"15",la:44.926,lo:2.440},
  {c:"Beauvais",a:"5 rue d’Agincourt, 60000 Beauvais",t:"09 81 76 20 11",h:"Mar–Sam 9h–12h / 14h–18h",d:"60",la:49.430,lo:2.081},
  {c:"Béthune",a:"34 rue Sadi Carnot, 62400 Béthune",t:"",h:"Mar–Sam 9h–12h / 14h–18h",d:"62",la:50.530,lo:2.640},
  {c:"Cambrai",a:"10 place du 9 Octobre, 59400 Cambrai",t:"03 27 59 80 76",h:"Mar–Sam 9h–12h / 14h–18h",d:"59",la:50.176,lo:3.235},
@@ -539,6 +538,7 @@ var sticky=$(".gn84-sticky"),hero=$(".gn84-hero");
 function onScroll(){var r=hero.getBoundingClientRect();sticky.classList.toggle("gn84-show",r.bottom<0)}window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 })();
 </script>
+
 
 
 
