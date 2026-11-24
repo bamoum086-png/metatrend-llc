@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Démo · Gold Nord × BFMTV · Metatrend</title><style>html,body{margin:0;padding:0;background:#15120e}</style></head><body><div style="background:#f0dc9a;color:#15120e;font:600 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center;padding:8px 12px">Démo Metatrend pour Gold Nord · Campagne météo BFMTV (30/11 – 04/12) · page de test : aucune donnée n’est envoyée</div><!-- ============================================================
   GOLD NORD × BFMTV — Page de campagne « Météo S49 » (M11-goldnord-84)
-  Version : V1.1 · 24/11/2026 · Metatrend
+  Version : V1.2 · 24/11/2026 · Metatrend (section agences : carte + cartes Noir & Or)
   À coller dans WordPress : bloc « HTML personnalisé » (ou widget HTML Elementor)
   sur une page vide (ex. goldnord.fr/bfmtv). Aucun fichier externe, aucune librairie.
   Tout est isolé : identifiant #gn84 et classes gn84-* (ne touche pas au thème).
@@ -88,25 +88,75 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 #gn84 .gn84-ok .gn84-tick{width:64px;height:64px;border-radius:50%;margin:0 auto 12px;background:var(--gn84-ink);display:flex;align-items:center;justify-content:center}
 #gn84 .gn84-test{background:#fff4d6;border:1px dashed #c9a03a;color:#7a5a00;font-size:12px;padding:8px 10px;border-radius:10px;margin-bottom:12px}
 /* ---------- AGENCES ---------- */
-#gn84 .gn84-find{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-bottom:18px;max-width:640px}
-#gn84 .gn84-find .gn84-in{display:flex;gap:8px;min-width:0}
-#gn84 .gn84-find input{flex:1;height:54px;padding:0 14px;border:1.5px solid #d9d1c3;border-radius:12px;font-size:17px;background:#fff;min-width:0}
-#gn84 .gn84-find .gn84-btn{width:auto;min-height:54px;padding:0 18px}
-#gn84 .gn84-geo{background:none;border:0;color:#7a5a00;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 0;font-size:15px;text-decoration:underline}
-#gn84 .gn84-msg{font-size:15px;color:#5d5852;margin-bottom:14px;min-height:1px}
-#gn84 .gn84-msg b{color:var(--gn84-ink)}
+#gn84 .gn84-agsec{position:relative;overflow:hidden;background:radial-gradient(70% 55% at 12% 8%,#2c2318 0%,rgba(21,18,14,0) 70%),radial-gradient(60% 50% at 100% 100%,#241d14 0%,rgba(21,18,14,0) 70%),var(--gn84-ink);color:var(--gn84-white)}
+#gn84 .gn84-agsec .gn84-kicker{color:var(--gn84-gold)}
+#gn84 .gn84-agsec h2{color:var(--gn84-white)}
+#gn84 .gn84-agsec .gn84-sub{color:#d8cfbf;margin-bottom:28px}
+#gn84 .gn84-aggrid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+#gn84 .gn84-mapbox{position:relative;border:1px solid var(--gn84-line);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));padding:16px 14px 14px}
+#gn84 .gn84-map{display:block;width:100%;max-width:330px;height:auto;margin:0 auto;overflow:visible}
+#gn84 .gn84-map .gn84-fr{fill:rgba(212,175,55,.05);stroke:rgba(212,175,55,.55);stroke-width:1.1;stroke-linejoin:round}
+#gn84 .gn84-map .gn84-dots circle{fill:rgba(240,220,154,.2)}
+#gn84 .gn84-map .gn84-pin{cursor:pointer;outline:none}
+#gn84 .gn84-map .gn84-hit{fill:rgba(212,175,55,.14)}
+#gn84 .gn84-map .gn84-core{fill:#d4af37;stroke:#15120e;stroke-width:1.6;transform-box:fill-box;transform-origin:center;transition:transform .2s ease,fill .2s ease}
+#gn84 .gn84-map .gn84-ring{fill:none;stroke:#f0dc9a;stroke-width:1.4;opacity:0;transform-box:fill-box;transform-origin:center}
+#gn84 .gn84-map .gn84-pin:hover .gn84-core,#gn84 .gn84-map .gn84-pin:focus-visible .gn84-core{fill:#f3dc8c;transform:scale(1.35)}
+#gn84 .gn84-map .gn84-pin.gn84-on .gn84-core{fill:#f3dc8c;transform:scale(1.6)}
+#gn84 .gn84-map .gn84-pin.gn84-on .gn84-ring{animation:gn84pulse 1.8s ease-out infinite}
+#gn84 .gn84-map .gn84-maptag rect{fill:#f0dc9a}
+#gn84 .gn84-map .gn84-maptag text{fill:#15120e;font:700 12px "Montserrat","Poppins",system-ui,Arial,sans-serif}
+#gn84 .gn84-map .gn84-you-h{fill:rgba(255,255,255,.16)}
+#gn84 .gn84-map .gn84-you-c{fill:#fff;stroke:#15120e;stroke-width:1.5}
+#gn84 .gn84-mapcount{position:absolute;left:18px;top:16px;display:flex;align-items:center;gap:8px;pointer-events:none}
+#gn84 .gn84-mapcount b{font-size:38px;line-height:1;font-weight:800;background:linear-gradient(180deg,#f3dc8c,#c9a03a);-webkit-background-clip:text;background-clip:text;color:transparent}
+#gn84 .gn84-mapcount span{font-size:11px;line-height:1.25;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#cfc5b4}
+#gn84 .gn84-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-top:10px;font-size:12px;color:#bfb5a4}
+#gn84 .gn84-legend span{display:inline-flex;align-items:center;gap:6px}
+#gn84 .gn84-legend i{width:9px;height:9px;border-radius:50%;background:#d4af37;box-shadow:0 0 0 3px rgba(212,175,55,.18)}
+#gn84 .gn84-legend svg{width:15px;height:15px;color:var(--gn84-gold)}
+#gn84 .gn84-searchbox{margin-bottom:16px}
+#gn84 .gn84-lbl{font-size:14px;font-weight:700;color:var(--gn84-goldlt);margin-bottom:8px}
+#gn84 .gn84-search{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid rgba(212,175,55,.6);border-radius:16px;padding:5px 5px 5px 14px;box-shadow:0 14px 36px rgba(0,0,0,.35);color:#a8862a}
+#gn84 .gn84-search:focus-within{border-color:var(--gn84-gold);box-shadow:0 0 0 4px rgba(212,175,55,.22),0 14px 36px rgba(0,0,0,.35)}
+#gn84 .gn84-search svg{flex:none}
+#gn84 .gn84-search input{flex:1;min-width:0;height:48px;border:0;outline:none;background:transparent;font-size:17px;color:var(--gn84-ink);padding:0;box-shadow:none}
+#gn84 .gn84-search input::placeholder{color:#9a948c}
+#gn84 .gn84-search .gn84-btn{width:auto;min-height:48px;padding:0 20px;border-radius:12px;font-size:16px;box-shadow:none}
+#gn84 .gn84-geo{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 14px;border-radius:999px;border:1px solid var(--gn84-line);background:rgba(255,255,255,.03);color:var(--gn84-goldlt);font-size:14px;font-weight:700;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+#gn84 .gn84-geo:hover{background:rgba(212,175,55,.1);border-color:var(--gn84-gold2)}
+#gn84 .gn84-msg{font-size:15px;color:#e9e2d6;margin-bottom:14px;padding:12px 14px;border-left:3px solid var(--gn84-gold);border-radius:4px 12px 12px 4px;background:rgba(212,175,55,.08)}
+#gn84 .gn84-msg:empty{display:none}
+#gn84 .gn84-msg b{color:var(--gn84-goldlt)}
 #gn84 .gn84-list{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
-#gn84 .gn84-ag{background:#fff;border:1px solid #ebe5da;border-radius:var(--gn84-r);padding:16px;display:flex;flex-direction:column;gap:6px}
-#gn84 .gn84-ag.gn84-near{border:2px solid var(--gn84-gold);box-shadow:0 8px 24px rgba(212,175,55,.18)}
-#gn84 .gn84-ag h3{font-size:18px;font-weight:800;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
-#gn84 .gn84-ag h3 small{font-size:12px;font-weight:700;color:#7a5a00;background:#f7edcc;border-radius:999px;padding:2px 8px;white-space:nowrap}
-#gn84 .gn84-ag p{font-size:14px;color:#5d5852}
-#gn84 .gn84-ag .gn84-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
-#gn84 .gn84-ag .gn84-acts a{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:10px;font-weight:700;font-size:14px;border:1.5px solid var(--gn84-ink)}
-#gn84 .gn84-ag .gn84-acts a.gn84-dir{background:var(--gn84-ink);color:#fff}
+#gn84 .gn84-ag{position:relative;display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:18px;border:1px solid rgba(212,175,55,.18);background:linear-gradient(180deg,#221c15,#1a1611);color:var(--gn84-white);transition:border-color .2s ease,transform .2s ease;animation:gn84in .35s ease both}
+#gn84 .gn84-ag:hover{border-color:rgba(212,175,55,.45)}
+#gn84 .gn84-ag.gn84-near{border:1.5px solid rgba(212,175,55,.85);background:radial-gradient(120% 90% at 100% 0%,rgba(212,175,55,.16),rgba(212,175,55,0) 60%),linear-gradient(180deg,#261f16,#1a1611);box-shadow:0 16px 40px rgba(0,0,0,.35),0 0 0 4px rgba(212,175,55,.07)}
+#gn84 .gn84-ag-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+#gn84 .gn84-ag h3{font-size:19px;line-height:1.2;font-weight:800;color:var(--gn84-white)}
+#gn84 .gn84-ag.gn84-near h3{font-size:22px}
+#gn84 .gn84-tags{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;flex:none;max-width:60%}
+#gn84 .gn84-tag-near{font-size:12px;font-weight:800;color:#15120e;background:linear-gradient(180deg,#f3dc8c,#d4af37);border-radius:999px;padding:3px 10px;white-space:nowrap}
+#gn84 .gn84-km{font-size:12px;font-weight:700;color:var(--gn84-goldlt);border:1px solid var(--gn84-line);border-radius:999px;padding:2px 9px;white-space:nowrap}
+#gn84 .gn84-st{display:flex;align-items:center;gap:7px;margin-top:-4px;font-size:13px;font-weight:700;color:#bfb5a4}
+#gn84 .gn84-st i{flex:none;width:8px;height:8px;border-radius:50%;background:#8b8680}
+#gn84 .gn84-st.gn84-open{color:#a7e3bd}
+#gn84 .gn84-st.gn84-open i{background:#4cc27a;box-shadow:0 0 0 3px rgba(76,194,122,.2)}
+#gn84 .gn84-ag-row{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.45;color:#cfc5b4}
+#gn84 .gn84-ag-row svg{flex:none;width:16px;height:16px;margin-top:2px;color:var(--gn84-gold)}
+#gn84 .gn84-ag .gn84-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto;padding-top:4px}
+#gn84 .gn84-ag .gn84-acts a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:46px;border-radius:12px;font-weight:700;font-size:14px;border:1.5px solid var(--gn84-gold2);color:var(--gn84-goldlt);transition:background .15s ease}
+#gn84 .gn84-ag .gn84-acts a:hover{background:rgba(212,175,55,.1)}
+#gn84 .gn84-ag .gn84-acts a svg{width:17px;height:17px}
+#gn84 .gn84-ag .gn84-acts a.gn84-dir{border:0;background:linear-gradient(180deg,#e2c25a,#c9a03a);color:#15120e}
 #gn84 .gn84-more{margin-top:14px}
-#gn84 .gn84-kitbox{margin-top:22px;background:var(--gn84-ink);color:var(--gn84-white);border-radius:var(--gn84-r);padding:20px;display:grid;gap:12px}
+#gn84 .gn84-kitbox{margin-top:30px;border:1px solid var(--gn84-line);background:linear-gradient(135deg,rgba(212,175,55,.16),rgba(212,175,55,.03));color:var(--gn84-white);border-radius:20px;padding:20px;display:grid;gap:14px}
+#gn84 .gn84-kitbox-t{display:flex;align-items:center;gap:14px}
+#gn84 .gn84-kitbox-i{flex:none;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--gn84-gold2);color:var(--gn84-gold)}
+#gn84 .gn84-kitbox h3{font-size:18px;font-weight:800;margin-bottom:2px}
 #gn84 .gn84-kitbox p{color:#d8cfbf;font-size:15px}
+@keyframes gn84pulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(3.4);opacity:0}}
+@keyframes gn84in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 /* ---------- FAQ ---------- */
 #gn84 .gn84-faq{display:grid;gap:10px;max-width:760px}
 #gn84 .gn84-faq details{background:#fff;border:1px solid #ebe5da;border-radius:14px;padding:0 16px}
@@ -151,9 +201,12 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 #gn84 .gn84-sec h2{font-size:36px}
 #gn84 .gn84-reass{grid-template-columns:repeat(4,1fr)}
 #gn84 .gn84-kitgrid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-#gn84 .gn84-list{grid-template-columns:repeat(3,1fr)}
-#gn84 .gn84-find{grid-template-columns:1fr auto;align-items:center}
-#gn84 .gn84-kitbox{grid-template-columns:1fr auto;align-items:center}
+#gn84 .gn84-aggrid{grid-template-columns:400px minmax(0,1fr);gap:36px;align-items:start}
+#gn84 .gn84-mapcol{position:sticky;top:24px}
+#gn84 .gn84-map{max-width:none}
+#gn84 .gn84-list{grid-template-columns:1fr 1fr}
+#gn84 .gn84-ag.gn84-near{grid-column:1/-1}
+#gn84 .gn84-kitbox{grid-template-columns:1fr auto;align-items:center;padding:22px 26px}
 #gn84 .gn84-kitbox .gn84-btn{width:auto}
 #gn84 .gn84-modal{align-items:center}
 #gn84 .gn84-dialog{border-radius:22px;padding:28px}
@@ -232,6 +285,7 @@ kit:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="current
 pin:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
 phone:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
 loc:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>',
+clock:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
 check:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
 tv:'<svg width="46" height="38" viewBox="0 0 46 38" fill="none" stroke="#d4af37" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="42" height="28" rx="4"/><path d="M16 36h14M23 30v6"/><circle cx="17" cy="14" r="4.5"/><path d="M17 6.5v1.6M17 19.9v1.6M9.5 14h1.6M22.9 14h1.6M11.7 8.7l1.1 1.1M21.2 18.2l1.1 1.1M11.7 19.3l1.1-1.1M21.2 9.8l1.1-1.1"/><path d="M24 22h12a4 4 0 0 0 0-8 5.5 5.5 0 0 0-10.6-1.4"/></svg>'
 };
@@ -270,28 +324,72 @@ function formHtml(id){return ''+
 '</form></div>'}
 /* ---- Agences ---- */
 function km(a,b,c,d){var R=6371,x=(c-a)*Math.PI/180,y=(d-b)*Math.PI/180,s=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(y/2)*Math.sin(y/2);return 2*R*Math.asin(Math.sqrt(s))}
-function agHtml(g,near,label){var map="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("Gold Nord "+g.a);
-return '<article class="gn84-ag'+(near?' gn84-near':'')+'"><h3>'+esc(g.c)+(label?'<small>'+esc(label)+'</small>':'')+'</h3><p>'+esc(g.a)+'</p><p>'+esc(g.h)+'</p>'+
+GN84_AGENCIES.forEach(function(g){var m=g.a.match(/\b\d{5}\b/);g.cp=m?m[0]:""});
+function byCity(c){for(var i=0;i<GN84_AGENCIES.length;i++)if(GN84_AGENCIES[i].c===c)return GN84_AGENCIES[i];return null}
+/* Horaires : « Mar–Sam 9h–12h / 14h–18h · Sam 10h–12h » → ouvert / fermé (heure de Paris) */
+var DAYS={lun:1,mar:2,mer:3,jeu:4,ven:5,sam:6,dim:0},DN=["dim.","lun.","mar.","mer.","jeu.","ven.","sam."];
+function parseH(h){var w={};String(h||"").split("·").forEach(function(seg){var m=seg.trim().match(/^([^\d]+?)\s+(\d.*)$/);if(!m)return;var days=[];
+m[1].split(",").forEach(function(p){p=p.trim().toLowerCase();var r=p.split(/\s*[–-]\s*/);if(r.length===2){var a=DAYS[r[0].slice(0,3)],b=DAYS[r[1].slice(0,3)];if(a==null||b==null)return;for(var d=a,n=0;n<7;d=(d+1)%7,n++){days.push(d);if(d===b)break}}else if(DAYS[p.slice(0,3)]!=null)days.push(DAYS[p.slice(0,3)])});
+var iv=[];m[2].replace(/(\d{1,2})h(\d{2})?\s*[–-]\s*(\d{1,2})h(\d{2})?/g,function(_,a,b,c,d){iv.push([+a*60+(+b||0),+c*60+(+d||0)])});days.forEach(function(d){w[d]=iv})});return w}
+function nowParis(){try{var o={};new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Paris",weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date()).forEach(function(p){o[p.type]=p.value});
+var wd={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[o.weekday];if(wd==null)throw 0;return {d:wd,m:(+o.hour%24)*60+(+o.minute)}}catch(e){var n=new Date();return {d:n.getDay(),m:n.getHours()*60+n.getMinutes()}}}
+function hm(m){var h=Math.floor(m/60),x=m%60;return h+"h"+(x?(x<10?"0":"")+x:"")}
+function openState(g){var w=g.w||(g.w=parseH(g.h));if(!Object.keys(w).length)return null;var n=nowParis(),t=w[n.d]||[],i;
+for(i=0;i<t.length;i++)if(n.m>=t[i][0]&&n.m<t[i][1])return {open:true,txt:"Ouvert · jusqu’à "+hm(t[i][1])};
+for(i=0;i<t.length;i++)if(n.m<t[i][0])return {open:false,txt:"Fermé · ouvre à "+hm(t[i][0])};
+for(var k=1;k<=7;k++){var d=(n.d+k)%7;if(w[d]&&w[d].length)return {open:false,txt:"Fermé · ouvre "+(k===1?"demain":DN[d])+" à "+hm(w[d][0][0])}}return null}
+/* Carte de France (contour simplifié) */
+var FR=[[51.05,2.37],[50.95,2.6],[50.8,2.9],[50.72,3.2],[50.6,3.3],[50.5,3.6],[50.35,3.7],[50.33,4.0],[50.13,4.2],[49.97,4.15],[50.15,4.82],[49.95,4.85],[49.8,4.95],[49.7,5.3],[49.55,5.45],[49.5,5.85],[49.47,6.37],[49.2,6.7],[49.17,7.05],[49.08,7.5],[49.05,7.9],[48.97,8.2],[48.6,7.8],[48.3,7.7],[48.0,7.6],[47.6,7.59],[47.45,7.15],[47.3,6.95],[47.1,6.75],[46.85,6.45],[46.6,6.1],[46.4,6.05],[46.15,5.97],[46.2,6.25],[46.4,6.5],[46.4,6.8],[46.1,6.85],[45.92,7.0],[45.6,7.05],[45.3,7.1],[45.1,6.65],[44.85,7.0],[44.6,6.95],[44.4,6.9],[44.15,7.6],[43.78,7.53],[43.55,7.05],[43.4,6.85],[43.2,6.6],[43.08,6.15],[43.1,5.8],[43.2,5.35],[43.35,5.0],[43.4,4.8],[43.45,4.4],[43.55,4.1],[43.4,3.6],[43.25,3.3],[43.05,3.05],[42.75,3.03],[42.43,3.17],[42.45,2.7],[42.4,2.3],[42.5,1.8],[42.6,1.45],[42.8,0.7],[42.7,0.3],[42.8,-0.2],[42.95,-0.6],[43.05,-1.0],[43.2,-1.4],[43.38,-1.78],[43.5,-1.52],[44.0,-1.35],[44.65,-1.25],[45.1,-1.15],[45.6,-1.25],[46.0,-1.15],[46.15,-1.2],[46.3,-1.35],[46.5,-1.8],[46.9,-2.15],[47.1,-2.05],[47.25,-2.2],[47.3,-2.5],[47.5,-2.6],[47.5,-2.9],[47.55,-3.2],[47.7,-3.5],[47.8,-4.1],[47.8,-4.35],[48.05,-4.72],[48.3,-4.6],[48.35,-4.78],[48.6,-4.6],[48.7,-4.0],[48.8,-3.5],[48.85,-3.0],[48.6,-2.7],[48.55,-2.3],[48.65,-2.0],[48.65,-1.5],[48.85,-1.55],[49.2,-1.6],[49.4,-1.85],[49.72,-1.95],[49.65,-1.6],[49.68,-1.25],[49.4,-1.15],[49.35,-0.6],[49.3,-0.1],[49.45,0.1],[49.7,0.2],[49.85,0.6],[49.95,1.2],[50.2,1.55],[50.4,1.58],[50.73,1.6],[50.95,1.85]];
+var CO=[[43.0,9.42],[42.75,9.5],[42.3,9.55],[41.9,9.4],[41.4,9.2],[41.6,8.8],[41.95,8.6],[42.3,8.6],[42.6,8.8],[42.7,9.15]];
+function proj(la,lo){return [20+(lo+4.9)*24.77,20+(51.15-la)*36]}
+function pip(x,y,P){var c=false;for(var i=0,j=P.length-1;i<P.length;j=i++){var a=P[i],b=P[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])c=!c}return c}
+function mapHtml(){var P=FR.map(function(c){return proj(c[0],c[1])}),Q=CO.map(function(c){return proj(c[0],c[1])});
+function path(a){return "M"+a.map(function(p){return p[0].toFixed(1)+" "+p[1].toFixed(1)}).join("L")+"Z"}
+var dots="";for(var y=14;y<390;y+=9)for(var x=14;x<396;x+=9)if(pip(x,y,P)||pip(x,y,Q))dots+='<circle cx="'+x+'" cy="'+y+'" r="1.4"/>';
+var pins=GN84_AGENCIES.map(function(g){var p=proj(g.la,g.lo);return '<g class="gn84-pin" data-city="'+esc(g.c)+'" transform="translate('+p[0].toFixed(1)+','+p[1].toFixed(1)+')" tabindex="0" role="button" aria-label="Agence Gold Nord de '+esc(g.c)+'"><title>'+esc(g.c)+'</title><circle class="gn84-hit" r="9"/><circle class="gn84-ring" r="4.5"/><circle class="gn84-core" r="4"/></g>'}).join("");
+return '<svg class="gn84-map" viewBox="0 0 400 392" role="img" aria-label="Carte des '+N+' agences Gold Nord en France"><path class="gn84-fr" d="'+path(P)+path(Q)+'"/><g class="gn84-dots">'+dots+'</g>'+
+'<g class="gn84-you" style="display:none"><circle class="gn84-you-h" r="10"/><circle class="gn84-you-c" r="4.5"/></g>'+pins+
+'<g class="gn84-maptag" style="display:none"><rect height="24" rx="12"/><text y="16.5" text-anchor="middle"></text></g></svg>'}
+function mapSel(city,origin){var svg=$(".gn84-map");if(!svg)return;var tag=$(".gn84-maptag",svg),you=$(".gn84-you",svg),sel=null;
+$$(".gn84-pin",svg).forEach(function(p){var on=p.getAttribute("data-city")===city;p.classList.toggle("gn84-on",on);if(on)sel=p});
+if(origin){var q=proj(origin[0],origin[1]);you.setAttribute("transform","translate("+q[0].toFixed(1)+","+q[1].toFixed(1)+")");you.style.display=""}else you.style.display="none";
+if(sel&&city){svg.appendChild(sel);var g=byCity(city),p=proj(g.la,g.lo),w=Math.round(city.length*7.4+22),x=Math.max(4,Math.min(396-w,p[0]-w/2)),y=p[1]-36;if(y<4)y=p[1]+14;
+tag.setAttribute("transform","translate("+x.toFixed(1)+","+y.toFixed(1)+")");tag.querySelector("rect").setAttribute("width",w);var t=tag.querySelector("text");t.setAttribute("x",w/2);t.textContent=city;svg.appendChild(tag);tag.style.display=""}else tag.style.display="none"}
+/* Cartes agences */
+function kmTxt(k){return k<3?"< 3 km":"≈ "+(k<20?Math.round(k):Math.round(k/5)*5)+" km"}
+function agHtml(g,o){o=o||{};var map="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("Gold Nord "+g.a),st=openState(g);
+return '<article class="gn84-ag'+(o.feat?' gn84-near':'')+'" data-gn84-city="'+esc(g.c)+'">'+
+'<div class="gn84-ag-top"><h3>'+esc(g.c)+'</h3>'+
+((o.label||o.km!=null)?'<div class="gn84-tags">'+(o.label?'<span class="gn84-tag-near">'+esc(o.label)+'</span>':'')+(o.km!=null?'<span class="gn84-km">'+kmTxt(o.km)+'</span>':'')+'</div>':'')+'</div>'+
+(st?'<p class="gn84-st'+(st.open?' gn84-open':'')+'"><i></i>'+esc(st.txt)+'</p>':'')+
+'<p class="gn84-ag-row">'+I.pin+'<span>'+esc(g.a)+'</span></p>'+
+'<p class="gn84-ag-row">'+I.clock+'<span>'+esc(g.h)+'</span></p>'+
 '<div class="gn84-acts"><a class="gn84-dir" href="'+map+'" target="_blank" rel="noopener" data-gn84-ag="'+esc(g.c)+'" data-gn84-act="itineraire">'+I.pin+' Itinéraire</a>'+
 '<a href="'+tel(g.t||C.phone)+'" data-gn84-ag="'+esc(g.c)+'" data-gn84-act="appel">'+I.phone+' Appeler</a></div></article>'}
-var showAll=false,lastSorted=null;
-function renderAgencies(sorted,msg){var list=$(".gn84-list"),m=$(".gn84-msg"),more=$(".gn84-more");lastSorted=sorted;
+var showAll=false,lastSorted=null,lastOpt={};
+function renderAgencies(sorted,msg,opt){opt=opt||{};var list=$(".gn84-list"),m=$(".gn84-msg"),more=$(".gn84-more");lastSorted=sorted;lastOpt=opt;
 var arr=sorted||GN84_AGENCIES.slice().sort(function(a,b){return a.c.localeCompare(b.c,"fr")});
 var lim=(sorted&&!showAll)?3:(showAll?arr.length:6);
-list.innerHTML=arr.slice(0,lim).map(function(g,i){return agHtml(g,sorted&&i===0,sorted&&i===0?"La plus proche":"")}).join("");
-m.innerHTML=msg||"";more.hidden=lim>=arr.length;more.textContent="Voir les "+arr.length+" agences";}
+list.innerHTML=arr.slice(0,lim).map(function(g,i){var f=!!sorted&&i===0;return agHtml(g,{feat:f,label:f?(opt.label||"La plus proche"):"",km:(sorted&&opt.precise&&g.km!=null&&!(f&&opt.label==="Dans votre ville"))?g.km:null})}).join("");
+m.innerHTML=msg||"";more.hidden=lim>=arr.length;more.textContent="Voir les "+arr.length+" agences";
+mapSel(sorted?arr[0].c:null,opt.origin||null)}
 function sortFrom(la,lo){return GN84_AGENCIES.map(function(g){var o={};for(var k in g)o[k]=g[k];o.km=km(la,lo,g.la,g.lo);return o}).sort(function(a,b){return a.km-b.km})}
+var FAR=" <b>Le kit postal gratuit vous évite le déplacement.</b>";
 function findByCP(cp){cp=(cp||"").replace(/\D/g,"");if(cp.length!==5){renderAgencies(null,"Entrez un code postal à 5 chiffres.");return}
 var d=cp.slice(0,2);if(d==="97"||d==="98"){showAll=false;renderAgencies(null,"Pas d’agence en outre-mer pour le moment : <b>le kit postal vous permet de nous envoyer votre or en toute sécurité.</b>");return}
 var c=GN84_DEP[d];if(!c){renderAgencies(null,"Code postal non reconnu.");return}
-var s=sortFrom(c[0],c[1]);showAll=false;
-var msg=s[0].km<45?"Bonne nouvelle : une agence Gold Nord est proche de chez vous.":"L’agence la plus proche est à environ "+Math.round(s[0].km/10)*10+" km. <b>Le kit postal gratuit vous évite le déplacement.</b>";
-renderAgencies(s,msg);track(C.events.agencyClick,{action:"recherche_cp",departement:d},C.events.fbAgency,true)}
+/* Même code postal (ou même secteur à 3 chiffres) qu’une agence : on part de cette agence, plus précis que le centre du département */
+var ex=null,p3=null;GN84_AGENCIES.forEach(function(g){if(g.cp===cp)ex=g;else if(!p3&&g.cp.slice(0,3)===cp.slice(0,3))p3=g});var ref=ex||p3;
+var s=ref?sortFrom(ref.la,ref.lo):sortFrom(c[0],c[1]);showAll=false;
+var msg=ex?"Bonne nouvelle : il y a une agence Gold Nord à <b>"+esc(ex.c)+"</b>.":(s[0].km<45?"Bonne nouvelle : une agence Gold Nord est proche de chez vous.":"L’agence la plus proche est à environ "+Math.round(s[0].km/10)*10+" km."+FAR);
+renderAgencies(s,msg,{precise:!!ref,label:ex?"Dans votre ville":"La plus proche"});track(C.events.agencyClick,{action:"recherche_cp",departement:d},C.events.fbAgency,true)}
 function geoFind(){if(!navigator.geolocation){renderAgencies(null,"La localisation n’est pas disponible sur cet appareil. Entrez votre code postal.");return}
-$(".gn84-msg").textContent="Localisation en cours…";
-navigator.geolocation.getCurrentPosition(function(p){var s=sortFrom(p.coords.latitude,p.coords.longitude);showAll=false;
-renderAgencies(s,s[0].km<45?"Une agence Gold Nord est proche de vous.":"L’agence la plus proche est à environ "+Math.round(s[0].km/10)*10+" km. <b>Le kit postal gratuit vous évite le déplacement.</b>");
+var m=$(".gn84-msg");m.textContent="Localisation en cours…";
+navigator.geolocation.getCurrentPosition(function(p){var la=p.coords.latitude,lo=p.coords.longitude,s=sortFrom(la,lo);showAll=false;
+renderAgencies(s,s[0].km<45?"Une agence Gold Nord est proche de vous.":"L’agence la plus proche est à environ "+Math.round(s[0].km/10)*10+" km."+FAR,{precise:true,origin:[la,lo]});
 track(C.events.agencyClick,{action:"geolocalisation"},C.events.fbAgency,true)},function(){renderAgencies(null,"Localisation refusée. Entrez votre code postal.")},{timeout:8000,maximumAge:600000})}
+function pickCity(city){var g=byCity(city);if(!g)return;showAll=false;renderAgencies(sortFrom(g.la,g.lo),"Agence de <b>"+esc(g.c)+"</b>, puis les agences voisines.",{label:"Sélectionnée"});
+track(C.events.agencyClick,{action:"carte",agence:g.c},C.events.fbAgency,true);if(window.innerWidth<820){var l=$(".gn84-list");if(l)l.scrollIntoView({behavior:"smooth",block:"start"})}}
 /* ---- Page ---- */
 var FAQ=[
 ["Le kit postal est-il vraiment gratuit ?","Oui. Le kit vous est envoyé gratuitement, et l’estimation de vos bijoux est gratuite et sans engagement."],
@@ -320,11 +418,15 @@ root.innerHTML=''+
 '</div>'+
 '<div class="gn84-reass"><div><b>Gratuit</b>sans engagement</div><div><b>5 000 €</b>envoi assuré</div><div><b>80 000</b>clients</div><div><b>'+N+'</b>agences en France</div></div>'+
 '</div><div>'+formHtml("gn84-form-page")+'</div></div></div></section>'+
-'<section class="gn84-sec" id="gn84-agences"><div class="gn84-wrap">'+
-'<p class="gn84-kicker">Nos agences</p><h2>'+N+' agences Gold Nord en France</h2><p class="gn84-sub">Estimation devant vous, par nos experts. Trouvez la plus proche :</p>'+
-'<div class="gn84-find"><div class="gn84-in"><input type="text" inputmode="numeric" maxlength="5" placeholder="Votre code postal" aria-label="Votre code postal" class="gn84-cp"><button class="gn84-btn gn84-btn-dark gn84-go">Chercher</button></div><button class="gn84-geo" type="button">'+I.loc+' Autour de moi</button></div>'+
-'<p class="gn84-msg" aria-live="polite"></p><div class="gn84-list"></div><button class="gn84-btn gn84-btn-line gn84-more" style="color:#15120e;border-color:#15120e" hidden></button>'+
-'<div class="gn84-kitbox"><div><h3 style="font-size:19px;font-weight:800;margin-bottom:4px">Pas d’agence près de chez vous ?</h3><p>Le kit postal gratuit vient à vous, partout en France.</p></div><button class="gn84-btn gn84-btn-gold" data-gn84="kit">'+I.kit+' Recevoir mon kit gratuit</button></div>'+
+'<section class="gn84-sec gn84-agsec" id="gn84-agences"><div class="gn84-wrap">'+
+'<p class="gn84-kicker">Nos agences</p><h2>Rencontrez nos experts <span class="gn84-gold">en agence</span></h2><p class="gn84-sub">'+N+' agences Gold Nord en France pour estimer vos bijoux devant vous, gratuitement et sans engagement.</p>'+
+'<div class="gn84-aggrid"><div class="gn84-mapcol"><div class="gn84-mapbox"><div class="gn84-mapcount"><b>'+N+'</b><span>agences<br>en France</span></div>'+mapHtml()+
+'<div class="gn84-legend"><span><i></i>Agence Gold Nord</span><span>'+I.kit+'Kit postal : partout en France</span></div></div></div>'+
+'<div class="gn84-listcol"><div class="gn84-searchbox"><p class="gn84-lbl">Trouvez l’agence la plus proche</p>'+
+'<div class="gn84-search">'+I.pin+'<input type="text" inputmode="numeric" maxlength="5" placeholder="Votre code postal" aria-label="Votre code postal" class="gn84-cp"><button class="gn84-btn gn84-btn-gold gn84-go" type="button">Chercher</button></div>'+
+'<button class="gn84-geo" type="button">'+I.loc+' Utiliser ma position</button></div>'+
+'<p class="gn84-msg" aria-live="polite"></p><div class="gn84-list"></div><button class="gn84-btn gn84-btn-line gn84-more" type="button" hidden></button></div></div>'+
+'<div class="gn84-kitbox"><div class="gn84-kitbox-t"><span class="gn84-kitbox-i">'+I.kit+'</span><div><h3>Pas d’agence près de chez vous ?</h3><p>Le kit postal gratuit vient à vous, partout en France.</p></div></div><button class="gn84-btn gn84-btn-gold" data-gn84="kit">'+I.kit+' Recevoir mon kit gratuit</button></div>'+
 '</div></section>'+
 '<section class="gn84-sec gn84-alt"><div class="gn84-wrap"><p class="gn84-kicker">Questions fréquentes</p><h2>Vous vous demandez…</h2><div class="gn84-faq">'+
 FAQ.map(function(f){return '<details><summary>'+esc(f[0])+'</summary><p>'+esc(f[1])+'</p></details>'}).join("")+
@@ -351,9 +453,10 @@ $(".gn84-x").addEventListener("click",closeModal);
 document.addEventListener("keydown",function(e){if(!modal.classList.contains("gn84-open"))return;if(e.key==="Escape")closeModal();
 if(e.key==="Tab"){var f=$$("button,input,a,select",modal).filter(function(x){return x.offsetParent!==null});if(!f.length)return;var a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
 function goAgencies(){closeModal();var s=$("#gn84-agences");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});setTimeout(function(){var i=$(".gn84-cp");if(i)i.focus({preventScroll:true})},500)}
-root.addEventListener("click",function(e){var b=e.target.closest("[data-gn84]");if(b){var k=b.getAttribute("data-gn84");
+root.addEventListener("click",function(e){var b=e.target.closest("[data-gn84]");if(b&&b!==root){var k=b.getAttribute("data-gn84");
 if(k==="kit"||k==="popkit"){track(C.events.kitClick,{position:k==="popkit"?"popup":"page"});if(k==="popkit"||window.innerWidth<820)openModal("form");else{$("#gn84-form-page input").focus();$("#gn84-kit").scrollIntoView({behavior:"smooth"})}}
 if(k==="agence"||k==="popagence"){track(C.events.agencyClick,{position:k==="popagence"?"popup":"page",action:"ouvrir"},C.events.fbAgency,true);goAgencies()}return}
+var pin=e.target.closest(".gn84-pin");if(pin){pickCity(pin.getAttribute("data-city"));return}
 var a=e.target.closest("[data-gn84-ag]");if(a)track(C.events.agencyClick,{action:a.getAttribute("data-gn84-act"),agence:a.getAttribute("data-gn84-ag")},C.events.fbAgency,true)});
 if(!(C.popupOncePerSession&&store("gn84_pop"))){setTimeout(function(){if(!modal.classList.contains("gn84-open")){openModal("home");store("gn84_pop","1");track(C.events.popupView,{})}},C.popupDelayMs)}
 /* ---- Agences : interactions ---- */
@@ -361,7 +464,8 @@ renderAgencies(null,"");
 $(".gn84-go").addEventListener("click",function(){findByCP($(".gn84-cp").value)});
 $(".gn84-cp").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();findByCP(this.value)}});
 $(".gn84-geo").addEventListener("click",geoFind);
-$(".gn84-more").addEventListener("click",function(){showAll=true;renderAgencies(lastSorted,$(".gn84-msg").innerHTML)});
+$(".gn84-more").addEventListener("click",function(){showAll=true;renderAgencies(lastSorted,$(".gn84-msg").innerHTML,lastOpt)});
+$$(".gn84-pin").forEach(function(p){p.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pickCity(p.getAttribute("data-city"))}})});
 /* ---- Formulaires ---- */
 var RX={prenom:/^.{2,}$/,nom:/^.{2,}$/,telephone:/^(?:(?:\+|00)33\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/,email:/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,code_postal:/^\d{5}$/,code_postal_2:/^\d{5}$/,adresse:/^.{4,}$/,ville:/^.{2,}$/};
 function check(form,names){var ok=true;names.forEach(function(n){var i=form.elements[n];if(!i)return;var v=(i.value||"").trim(),good=RX[n]?RX[n].test(v):!!v;var w=i.closest(".gn84-f");if(w)w.classList.toggle("gn84-err",!good);if(!good&&ok){ok=false;i.focus()}});return ok}
