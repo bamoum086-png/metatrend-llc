@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Démo · Gold Nord × BFMTV · Metatrend</title><style>html,body{margin:0;padding:0;background:#15120e}</style></head><body><div style="background:#f0dc9a;color:#15120e;font:600 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center;padding:8px 12px">Démo Metatrend pour Gold Nord · Campagne météo BFMTV (30/11 – 04/12) · les demandes de test arrivent dans le tableau Gold Nord</div><!-- ============================================================
   GOLD NORD × BFMTV — Page de campagne « Météo S49 » (M11-goldnord-84)
-  Version : V1.9 · 24/11/2026 · bouton « Estimer mon or » plus visible · calculatrice « Estimer mon or » (tarifs Gold Nord) + menu latéral · demandes → Google Sheets · 15 agences · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
+  Version : V1.10 · 24/11/2026 · lingots dans la calculatrice (au tarif 24 carats) · bouton « Estimer mon or » plus visible · calculatrice « Estimer mon or » (tarifs Gold Nord) + menu latéral · demandes → Google Sheets · 15 agences · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
   À coller dans WordPress : bloc « HTML personnalisé » (ou widget HTML Elementor)
   sur une page vide (ex. goldnord.fr/bfmtv). Aucun fichier externe, aucune librairie.
   Tout est isolé : identifiant #gn84 et classes gn84-* (ne touche pas au thème).
@@ -285,10 +285,14 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 #gn84 .gn84-ckit-h b{display:block;font-size:16px;line-height:1.25}
 #gn84 .gn84-ckit-h small{display:block;font-size:13px;color:#6b665f}
 #gn84 .gn84-ckit .gn84-s1>h3,#gn84 .gn84-ckit .gn84-s1>.gn84-note{display:none}
+#gn84 .gn84-cbig{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:0 0 10px;padding:10px 12px;border-radius:12px;background:#fff7e0;border:1px solid rgba(212,175,55,.55);font-size:13px;color:#5d4a16}
+#gn84 .gn84-cbig svg{flex:none;color:#a8862a}
+#gn84 .gn84-cbig span{flex:1;min-width:180px}
+#gn84 .gn84-cbig button{border:0;background:var(--gn84-ink);color:var(--gn84-goldlt);font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px;cursor:pointer}
 #gn84 .gn84-ckit .gn84-card{box-shadow:0 10px 30px rgba(21,18,14,.12);border:1px solid #ebe5da;max-width:none;padding:18px}
 #gn84 .gn84-citems-t{display:none;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#a8862a;margin:4px 2px 10px}
 #gn84 .gn84-has-res .gn84-citems-t{display:block}
-#gn84 .gn84-ctabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:#ebe4d6;margin-bottom:12px}
+#gn84 .gn84-ctabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:14px;background:#ebe4d6;margin-bottom:12px}
 #gn84 .gn84-ctabs button{min-height:42px;border:0;border-radius:11px;background:none;font-weight:700;font-size:14px;color:#6b665f;cursor:pointer}
 #gn84 .gn84-ctabs button.gn84-on{background:#fff;color:var(--gn84-ink);box-shadow:0 2px 8px rgba(21,18,14,.1)}
 #gn84 .gn84-crows{display:grid;gap:8px}
@@ -549,24 +553,29 @@ function drawerHtml(){return '<div class="gn84-drawer" aria-hidden="true"><div c
 '<div class="gn84-dfoot"><a class="gn84-btn gn84-btn-line" href="'+tel(C.phone)+'">'+I.phone+' '+esc(C.phone)+'</a><div class="gn84-dsoc"><a href="'+esc(C.instagramUrl)+'" target="_blank" rel="noopener" data-gn84-soc="instagram">'+I.cam+' Instagram</a><a href="'+esc(C.facebookUrl)+'" target="_blank" rel="noopener" data-gn84-soc="facebook">'+I.fb+' Facebook</a></div></div>'+
 '</nav></div>'}
 var CALC_GOLD=[["24","24 carats","Or pur 999 · lingots, pièces"],["22","22 carats","Or 916 · bijoux orientaux"],["18","18 carats","Or 750 · le plus courant en France"],["14","14 carats","Or 585 · bijoux étrangers"],["9","9 carats","Or 375 · bijoux anglais"]];
+var CALC_BARS=[["l1000","1 kg","1000 g · or fin 999,9",1000],["l500","500 g","Or fin 999,9",500],["l250","250 g","Or fin 999,9",250],["l100","100 g","Or fin 999,9",100],["l50","50 g","Or fin 999,9",50],["loz","1 once","31,10 g · or fin 999,9",31.1035],["l20","20 g","Lingotin · or fin 999,9",20],["l10","10 g","Lingotin · or fin 999,9",10],["l5","5 g","Lingotin · or fin 999,9",5]];
+function barW(id){for(var i=0;i<CALC_BARS.length;i++)if(CALC_BARS[i][0]===id)return CALC_BARS[i][3];return 0}
+function unitPrice(k,id){return k==="gold"?PR.gold[id]:k==="bars"?(PR.gold["24"]?Math.round(barW(id)*PR.gold["24"]*100)/100:0):PR.coins[id]}
 var CALC_COINS=[["fr20","20 Francs","Napoléon · France"],["fr10","10 Francs","Demi-Napoléon · France"],["us20","20 Dollars","États-Unis"],["us10","10 Dollars","États-Unis"],["mx50","50 Pesos","Mexique"]];
 var PR={gold:{},coins:{},date:C.calcPrices.date};(function(){var k;for(k in C.calcPrices.gold)PR.gold[k]=C.calcPrices.gold[k];for(k in C.calcPrices.coins)PR.coins[k]=C.calcPrices.coins[k]})();
 function eur(n,d){return Number(n).toLocaleString("fr-FR",{minimumFractionDigits:d==null?2:d,maximumFractionDigits:d==null?2:d})+" €"}
 function calcRow(kind,r){var unit=kind==="gold"?"g":"u.",badge=kind==="gold"?'<span class="gn84-ct">'+r[0]+'<small>CARATS</small></span>':'<span class="gn84-ct">'+I.calc.replace('width="20" height="20"','width="20" height="20"')+'</span>';
 if(kind==="coins")badge='<span class="gn84-ct" style="font-size:12px">'+esc(r[1].split(" ")[0])+'<small>'+esc(r[1].split(" ")[1].toUpperCase())+'</small></span>';
-return '<div class="gn84-crow" data-k="'+kind+'" data-id="'+r[0]+'"><div class="gn84-cname">'+badge+'<div><b>'+esc(kind==="gold"?"Or "+r[1]:"Pièce "+r[1])+'</b><em>'+esc(r[2])+'</em><span class="gn84-cp" data-cp="'+kind+':'+r[0]+'"></span></div></div>'+
-'<div class="gn84-qty"><button type="button" data-gn84c="-" aria-label="Moins">−</button><input type="text" inputmode="decimal" value="" placeholder="0" aria-label="'+esc(kind==="gold"?"Poids en grammes, or "+r[1]:"Nombre de pièces "+r[1])+'"><i>'+unit+'</i><button type="button" data-gn84c="+" aria-label="Plus">+</button></div></div>'}
+if(kind==="bars")badge='<span class="gn84-ct" style="font-size:12px">'+esc(r[1].split(" ")[0])+'<small>'+esc((r[1].split(" ")[1]||"").toUpperCase())+'</small></span>';
+return '<div class="gn84-crow" data-k="'+kind+'" data-id="'+r[0]+'"><div class="gn84-cname">'+badge+'<div><b>'+esc(kind==="gold"?"Or "+r[1]:kind==="bars"?"Lingot "+r[1]:"Pièce "+r[1])+'</b><em>'+esc(r[2])+'</em><span class="gn84-cp" data-cp="'+kind+':'+r[0]+'"></span></div></div>'+
+'<div class="gn84-qty"><button type="button" data-gn84c="-" aria-label="Moins">−</button><input type="text" inputmode="decimal" value="" placeholder="0" aria-label="'+esc(kind==="gold"?"Poids en grammes, or "+r[1]:kind==="bars"?"Nombre de lingots "+r[1]:"Nombre de pièces "+r[1])+'"><i>'+unit+'</i><button type="button" data-gn84c="+" aria-label="Plus">+</button></div></div>'}
 function calcHtml(){return '<div class="gn84-calcm" role="dialog" aria-modal="true" aria-labelledby="gn84-ct"><div class="gn84-cpanel">'+
 '<div class="gn84-chead"><h2 id="gn84-ct">Combien vaut votre or&nbsp;?</h2><p>Tarifs de rachat Gold Nord <b class="gn84-cdate"></b> · montant net à percevoir</p><button class="gn84-cx" type="button" aria-label="Fermer">×</button></div>'+
 '<div class="gn84-cbody">'+
 '<div class="gn84-cres" aria-live="polite"><p class="gn84-cres-k">'+I.check.replace('stroke="#d4af37"','stroke="#c9f2da"').replace('width="30" height="30"','width="18" height="18"')+' Votre estimation</p><p class="gn84-cres-v">0,00 €</p><p class="gn84-cres-s">net à percevoir*, payé par virement ou chèque</p><div class="gn84-cres-d"></div></div>'+
-'<div class="gn84-ckit"><div class="gn84-ckit-h"><i>'+I.kit+'</i><div><b>Encaissez cette somme : recevez votre kit postal gratuit</b><small>Envoi assuré jusqu’à 5 000 € · sans engagement</small></div></div>'+formHtml("gn84-form-calc",{noCalc:true})+'</div>'+
+'<div class="gn84-ckit"><div class="gn84-ckit-h"><i>'+I.kit+'</i><div><b>Encaissez cette somme : recevez votre kit postal gratuit</b><small>Envoi assuré jusqu’à 5 000 € · sans engagement</small></div></div><p class="gn84-cbig" hidden>'+I.pin+'<span>Montant supérieur à 5 000 € : vous pouvez aussi venir dans l’une de nos '+N+' agences.</span><button type="button" data-gn84="agence">Trouver une agence</button></p>'+formHtml("gn84-form-calc",{noCalc:true})+'</div>'+
 '<p class="gn84-citems-t">Vos objets · modifiables</p>'+
-'<div class="gn84-ctabs" role="tablist"><button type="button" class="gn84-on" data-gn84tab="gold">Bijoux &amp; or</button><button type="button" data-gn84tab="coins">Pièces d’or</button></div>'+
+'<div class="gn84-ctabs" role="tablist"><button type="button" class="gn84-on" data-gn84tab="gold">Bijoux &amp; or</button><button type="button" data-gn84tab="coins">Pièces</button><button type="button" data-gn84tab="bars">Lingots</button></div>'+
 '<div class="gn84-crows" data-pane="gold">'+CALC_GOLD.map(function(r){return calcRow("gold",r)}).join("")+'</div>'+
 '<div class="gn84-crows" data-pane="coins" hidden>'+CALC_COINS.map(function(r){return calcRow("coins",r)}).join("")+'</div>'+
+'<div class="gn84-crows" data-pane="bars" hidden>'+CALC_BARS.map(function(r){return calcRow("bars",r)}).join("")+'</div>'+
 '<p class="gn84-chint">'+I.info+'<span>Vous ne connaissez pas le carat&nbsp;? Choisissez <b>18 carats</b>, le plus courant en France. Nos experts vérifient chaque bijou.</span></p>'+
-'<p class="gn84-cdisc">*Estimation indicative calculée avec les tarifs de rachat en ligne Gold Nord du jour, nets de taxes. Le montant définitif vous est confirmé après expertise de vos bijoux.</p>'+
+'<p class="gn84-cdisc">*Estimation indicative calculée avec les tarifs de rachat en ligne Gold Nord du jour, nets de taxes (lingots : poids × tarif 24 carats). Le montant définitif vous est confirmé après expertise de vos bijoux.</p>'+
 '</div>'+
 '<div class="gn84-cfoot"><button type="button" class="gn84-btn gn84-btn-gold gn84-cgo" disabled>Voir mon estimation</button></div>'+
 '</div></div>'}
@@ -647,12 +656,12 @@ function closeDrawer(){drawer.classList.remove("gn84-open");drawer.setAttribute(
 var calcm=$(".gn84-calcm"),cpanel=$(".gn84-cpanel"),cbody=$(".gn84-cbody"),cgo=$(".gn84-cgo"),shown=false,cformEst=$("#gn84-form-calc").elements.estimation;
 function num(v){v=String(v||"").replace(",",".").replace(/[^\d.]/g,"");var n=parseFloat(v);return isFinite(n)&&n>0?Math.min(n,100000):0}
 function fmtIn(n,k){return n?(k==="gold"?String(Math.round(n*100)/100).replace(".",","):String(Math.round(n))):""}
-function paintPrices(){$(".gn84-cdate").textContent=PR.live?"du jour":"du "+PR.date;$$("[data-cp]").forEach(function(e){var a=e.getAttribute("data-cp").split(":");var v=a[0]==="gold"?PR.gold[a[1]]:PR.coins[a[1]];e.textContent=v?(eur(v)+(a[0]==="gold"?" / g":" / pièce")):""})}
-function lines(){var L=[];$$(".gn84-crow",calcm).forEach(function(row){var k=row.getAttribute("data-k"),id=row.getAttribute("data-id"),q=num($("input",row).value),pr=k==="gold"?PR.gold[id]:PR.coins[id];row.classList.toggle("gn84-filled",q>0);if(q>0&&pr){var lab=k==="gold"?("Or "+id+" ct · "+fmtIn(q,k)+" g"):((row.querySelector("b").textContent.replace("Pièce ",""))+" × "+fmtIn(q,k));L.push({lab:lab,v:q*pr})}});return L}
+function paintPrices(){$(".gn84-cdate").textContent=PR.live?"du jour":"du "+PR.date;$$("[data-cp]").forEach(function(e){var a=e.getAttribute("data-cp").split(":");var v=unitPrice(a[0],a[1]);e.textContent=v?(eur(v)+(a[0]==="gold"?" / g":a[0]==="bars"?" / lingot":" / pièce")):""})}
+function lines(){var L=[];$$(".gn84-crow",calcm).forEach(function(row){var k=row.getAttribute("data-k"),id=row.getAttribute("data-id"),q=num($("input",row).value),pr=unitPrice(k,id);row.classList.toggle("gn84-filled",q>0);if(q>0&&pr){var lab=k==="gold"?("Or "+id+" ct · "+fmtIn(q,k)+" g"):k==="bars"?(row.querySelector("b").textContent+" × "+fmtIn(q,k)):((row.querySelector("b").textContent.replace("Pièce ",""))+" × "+fmtIn(q,k));L.push({lab:lab,v:q*pr})}});return L}
 function total(L){return L.reduce(function(a,l){return a+l.v},0)}
 function refresh(){var L=lines(),t=total(L);cgo.disabled=!(t>0);cgo.textContent=t>0?"Voir mon estimation ("+L.length+(L.length>1?" objets)":" objet)"):"Voir mon estimation";if(shown)render(L,t,false)}
 function render(L,t,anim){var v=$(".gn84-cres-v",calcm);$(".gn84-cres-d",calcm).innerHTML=L.map(function(l){return '<span><em style="font-style:normal">'+esc(l.lab)+'</em><b>'+eur(l.v)+'</b></span>'}).join("");
-var txt=eur(t)+" ("+L.map(function(l){return l.lab}).join(" ; ")+") · tarifs "+(PR.live?"du jour":"du "+PR.date);cformEst.value=t>0?txt:"";
+$(".gn84-cbig",calcm).hidden=!(t>5000);var txt=eur(t)+" ("+L.map(function(l){return l.lab}).join(" ; ")+") · tarifs "+(PR.live?"du jour":"du "+PR.date);cformEst.value=t>0?txt:"";
 if(anim&&!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)){var t0=null;(function st(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/900),e=1-Math.pow(1-k,3);v.textContent=eur(t*e);if(k<1)requestAnimationFrame(st)})(performance.now())}else v.textContent=eur(t)}
 function showResult(){var L=lines(),t=total(L);if(!(t>0))return;shown=true;cpanel.classList.add("gn84-has-res");render(L,t,true);cbody.scrollTo?cbody.scrollTo({top:0,behavior:"smooth"}):(cbody.scrollTop=0);
 track(C.events.calcResult,{value:Math.round(t),currency:"EUR",objets:L.length},C.events.fbCalc,true);setTimeout(function(){var i=$("#gn84-form-calc input[name=prenom]");if(i&&window.innerWidth>=820)i.focus({preventScroll:true})},600)}
@@ -713,6 +722,7 @@ var sticky=$(".gn84-sticky"),hero=$(".gn84-hero");
 function onScroll(){var r=hero.getBoundingClientRect();sticky.classList.toggle("gn84-show",r.bottom<0)}window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 })();
 </script>
+
 
 
 
