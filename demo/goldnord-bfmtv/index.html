@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Démo · Gold Nord × BFMTV · Metatrend</title><style>html,body{margin:0;padding:0;background:#15120e}</style></head><body><div style="background:#f0dc9a;color:#15120e;font:600 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center;padding:8px 12px">Démo Metatrend pour Gold Nord · Campagne météo BFMTV (30/11 – 04/12) · page de test : aucune donnée n’est envoyée</div><!-- ============================================================
   GOLD NORD × BFMTV — Page de campagne « Météo S49 » (M11-goldnord-84)
-  Version : V1.4 · 24/11/2026 · Metatrend (formulaire : l’étape 2 s’affiche comme une nouvelle page)
+  Version : V1.5 · 24/11/2026 · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
   À coller dans WordPress : bloc « HTML personnalisé » (ou widget HTML Elementor)
   sur une page vide (ex. goldnord.fr/bfmtv). Aucun fichier externe, aucune librairie.
   Tout est isolé : identifiant #gn84 et classes gn84-* (ne touche pas au thème).
@@ -337,10 +337,10 @@ function formHtml(id){return ''+
 '<div class="gn84-progress"><span class="gn84-sp gn84-sp1"><b>1</b>Vos coordonnées</span><i class="gn84-sline"></i><span class="gn84-sp gn84-sp2"><b>2</b>Livraison</span></div>'+
 '<div class="gn84-s1">'+
 '<h3>Votre kit postal gratuit</h3><p class="gn84-note">Reçu chez vous, sans frais et sans engagement.</p>'+
-'<label class="gn84-f"><span>Prénom</span><input name="prenom" autocomplete="given-name" required><em>Indiquez votre prénom.</em></label>'+
-'<label class="gn84-f"><span>Téléphone</span><input name="telephone" type="tel" inputmode="tel" autocomplete="tel" required><em>Numéro de téléphone invalide.</em></label>'+
+'<div class="gn84-row2"><label class="gn84-f"><span>Prénom</span><input name="prenom" autocomplete="given-name" required><em>Indiquez votre prénom.</em></label>'+
+'<label class="gn84-f"><span>Nom</span><input name="nom" autocomplete="family-name" required><em>Indiquez votre nom.</em></label></div>'+
 '<label class="gn84-f"><span>E-mail</span><input name="email" type="email" inputmode="email" autocomplete="email" required><em>Adresse e-mail invalide.</em></label>'+
-'<label class="gn84-f"><span>Code postal</span><input name="code_postal" inputmode="numeric" autocomplete="postal-code" maxlength="5" required><em>Code postal à 5 chiffres.</em></label>'+
+'<label class="gn84-f"><span>Téléphone</span><input name="telephone" type="tel" inputmode="tel" autocomplete="tel" required><em>Numéro de téléphone invalide.</em></label>'+
 '<label class="gn84-consent"><input type="checkbox" name="consentement" value="oui" required><span>J’accepte que Gold Nord utilise ces informations pour m’envoyer le kit postal et me recontacter au sujet de ma demande. <a href="'+esc(C.privacyUrl)+'" target="_blank" rel="noopener">Politique de confidentialité</a></span></label>'+
 '<button type="button" class="gn84-btn gn84-btn-gold gn84-next">Continuer</button>'+
 '<p class="gn84-small">Étape 1 sur 2 · 30 secondes</p>'+
@@ -348,13 +348,9 @@ function formHtml(id){return ''+
 '<div class="gn84-s2" hidden>'+
 '<div class="gn84-s2head"><span class="gn84-s2i">'+I.kit+'</span><div><p class="gn84-s2k">Étape 2 sur 2 · Livraison</p><h3>Où envoyer votre kit&nbsp;?</h3></div></div>'+
 '<div class="gn84-recap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a03a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="gn84-recap-t"></span><button type="button" class="gn84-back2">Modifier</button></div>'+
-'<label class="gn84-f"><span>Nom</span><input name="nom" autocomplete="family-name" required><em>Indiquez votre nom.</em></label>'+
 '<label class="gn84-f"><span>Adresse</span><input name="adresse" autocomplete="address-line1" required><em>Indiquez votre adresse.</em></label>'+
-'<label class="gn84-f"><span>Complément (facultatif)</span><input name="complement" autocomplete="address-line2"></label>'+
-'<div class="gn84-row2"><label class="gn84-f"><span>Code postal</span><input name="code_postal_2" inputmode="numeric" maxlength="5" autocomplete="postal-code" required><em>5 chiffres.</em></label>'+
+'<div class="gn84-row2"><label class="gn84-f"><span>Code postal</span><input name="code_postal" inputmode="numeric" maxlength="5" autocomplete="postal-code" required><em>5 chiffres.</em></label>'+
 '<label class="gn84-f"><span>Ville</span><input name="ville" autocomplete="address-level2" required><em>Indiquez la ville.</em></label></div>'+
-'<p class="gn84-f" style="margin-bottom:6px"><span>Paiement souhaité</span></p>'+
-'<div class="gn84-pay"><label><input type="radio" name="paiement" value="virement" checked> Virement</label><label><input type="radio" name="paiement" value="cheque"> Chèque</label></div>'+
 '<input class="gn84-hp" name="site_web" tabindex="-1" autocomplete="off" aria-hidden="true">'+
 '<button type="submit" class="gn84-btn gn84-btn-gold">'+I.kit+' Recevoir mon kit gratuit</button>'+
 '<button type="button" class="gn84-back">← Modifier mes informations</button>'+
@@ -401,7 +397,6 @@ function agHtml(g,o){o=o||{};var map="https://www.google.com/maps/search/?api=1&
 return '<article class="gn84-ag'+(o.feat?' gn84-near':'')+'" data-gn84-city="'+esc(g.c)+'">'+
 '<div class="gn84-ag-top"><h3>'+esc(g.c)+'</h3>'+
 ((o.label||o.km!=null)?'<div class="gn84-tags">'+(o.label?'<span class="gn84-tag-near">'+esc(o.label)+'</span>':'')+(o.km!=null?'<span class="gn84-km">'+kmTxt(o.km)+'</span>':'')+'</div>':'')+'</div>'+
-(st?'<p class="gn84-st'+(st.open?' gn84-open':'')+'"><i></i>'+esc(st.txt)+'</p>':'')+
 '<p class="gn84-ag-row">'+I.pin+'<span>'+esc(g.a)+'</span></p>'+
 '<p class="gn84-ag-row">'+I.clock+'<span>'+esc(g.h)+'</span></p>'+
 '<div class="gn84-acts"><a class="gn84-dir" href="'+map+'" target="_blank" rel="noopener" data-gn84-ag="'+esc(g.c)+'" data-gn84-act="itineraire">'+I.pin+' Itinéraire</a>'+
@@ -508,10 +503,10 @@ $(".gn84-geo").addEventListener("click",geoFind);
 $(".gn84-more").addEventListener("click",function(){showAll=true;renderAgencies(lastSorted,$(".gn84-msg").innerHTML,lastOpt)});
 $$(".gn84-pin").forEach(function(p){p.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pickCity(p.getAttribute("data-city"))}})});
 /* ---- Formulaires ---- */
-var RX={prenom:/^.{2,}$/,nom:/^.{2,}$/,telephone:/^(?:(?:\+|00)33\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/,email:/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,code_postal:/^\d{5}$/,code_postal_2:/^\d{5}$/,adresse:/^.{4,}$/,ville:/^.{2,}$/};
+var RX={prenom:/^.{2,}$/,nom:/^.{2,}$/,telephone:/^(?:(?:\+|00)33\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/,email:/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,code_postal:/^\d{5}$/,adresse:/^.{4,}$/,ville:/^.{2,}$/};
 function check(form,names){var ok=true;names.forEach(function(n){var i=form.elements[n];if(!i)return;var v=(i.value||"").trim(),good=RX[n]?RX[n].test(v):!!v;var w=i.closest(".gn84-f");if(w)w.classList.toggle("gn84-err",!good);if(!good&&ok){ok=false;i.focus()}});return ok}
 function data(form){var d={};$$("input",form).forEach(function(i){if(i.type==="radio"&&!i.checked)return;if(i.type==="checkbox"){d[i.name]=i.checked?"oui":"non";return}d[i.name]=(i.value||"").trim()});
-d.code_postal_livraison=d.code_postal_2;delete d.code_postal_2;for(var k in utm)d[k]=utm[k];d.source="landing_bfmtv_meteo_s49";d.page=location.href.split("#")[0];d.date=new Date().toISOString();for(var x in C.extraFields)d[x]=C.extraFields[x];return d}
+d.code_postal_livraison=d.code_postal||"";for(var k in utm)d[k]=utm[k];d.source="landing_bfmtv_meteo_s49";d.page=location.href.split("#")[0];d.date=new Date().toISOString();for(var x in C.extraFields)d[x]=C.extraFields[x];return d}
 function send(d){if(!C.endpoint)return Promise.resolve({test:true});var opt={method:"POST",credentials:"same-origin"};
 if(C.endpointFormat==="json"){opt.headers={"Content-Type":"application/json"};opt.body=JSON.stringify(d)}else{var fd=new FormData();for(var k in d)fd.append(k,d[k]);opt.body=fd}
 return fetch(C.endpoint,opt).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r})}
@@ -519,15 +514,14 @@ $$(".gn84-form").forEach(function(form){var s1=$(".gn84-s1",form),s2=$(".gn84-s2
 function go(n){var card=form.parentNode,show=n===2?s2:s1,hide=n===2?s1:s2;form.classList.toggle("gn84-at2",n===2);card.classList.toggle("gn84-at2",n===2);hide.hidden=true;show.hidden=false;show.classList.remove("gn84-in","gn84-inb");void show.offsetWidth;show.classList.add(n===2?"gn84-in":"gn84-inb");
 var dlg=form.closest(".gn84-dialog");if(dlg){dlg.scrollTop=0}else{var r=card.getBoundingClientRect();if(r.top<0)card.scrollIntoView({behavior:"smooth",block:"start"})}}
 form.elements.code_postal.addEventListener("input",function(){this.value=this.value.replace(/\D/g,"").slice(0,5)});
-form.elements.code_postal_2.addEventListener("input",function(){this.value=this.value.replace(/\D/g,"").slice(0,5)});
-$(".gn84-next",form).addEventListener("click",function(){var c=form.elements.consentement,cw=c.closest(".gn84-consent");if(!check(form,["prenom","telephone","email","code_postal"]))return;
+form.addEventListener("input",function(e){var w=e.target.closest&&e.target.closest(".gn84-f");if(w)w.classList.remove("gn84-err")});
+$(".gn84-next",form).addEventListener("click",function(){var c=form.elements.consentement,cw=c.closest(".gn84-consent");if(!check(form,["prenom","nom","email","telephone"]))return;
 if(!c.checked){cw.classList.add("gn84-err");c.focus();return}cw.classList.remove("gn84-err");
-if(!form.elements.code_postal_2.value)form.elements.code_postal_2.value=form.elements.code_postal.value;
-var rc=[form.elements.prenom.value.trim(),form.elements.telephone.value.trim()].filter(Boolean).join(" · ");$(".gn84-recap-t",form).textContent=rc;
-go(2);setTimeout(function(){form.elements.nom.focus({preventScroll:true})},340);
+var rc=[(form.elements.prenom.value.trim()+" "+form.elements.nom.value.trim()).trim(),form.elements.telephone.value.trim()].filter(Boolean).join(" · ");$(".gn84-recap-t",form).textContent=rc;
+go(2);setTimeout(function(){form.elements.adresse.focus({preventScroll:true})},340);
 track(C.events.step1,{});if(C.sendPartial){var p=data(form);p.etape="1_partielle";send(p).catch(function(){})}});
 $$(".gn84-back,.gn84-back2",form).forEach(function(b){b.addEventListener("click",function(){go(1)})});
-form.addEventListener("submit",function(e){e.preventDefault();if(busy)return;if(!check(form,["nom","adresse","code_postal_2","ville"]))return;
+form.addEventListener("submit",function(e){e.preventDefault();if(busy)return;if(!check(form,["adresse","code_postal","ville"]))return;
 if(form.elements.site_web.value)return; /* anti-spam */
 var d=data(form);d.etape="2_complete";var id=eid();d.event_id=id;var btn=form.querySelector("button[type=submit]");busy=true;btn.disabled=true;btn.style.opacity=".7";
 send(d).then(function(){store("gn84_prenom",d.prenom||"");store("gn84_lead","1");track(C.events.lead,{method:"kit_postal",form:form.id},C.events.fbLead,false,id);
@@ -545,6 +539,7 @@ var sticky=$(".gn84-sticky"),hero=$(".gn84-hero");
 function onScroll(){var r=hero.getBoundingClientRect();sticky.classList.toggle("gn84-show",r.bottom<0)}window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 })();
 </script>
+
 
 
 </body></html>
