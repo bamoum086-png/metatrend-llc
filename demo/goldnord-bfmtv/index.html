@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Démo · Gold Nord × BFMTV · Metatrend</title><style>html,body{margin:0;padding:0;background:#15120e}</style></head><body><div style="background:#f0dc9a;color:#15120e;font:600 13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;text-align:center;padding:8px 12px">Démo Metatrend pour Gold Nord · Campagne météo BFMTV (30/11 – 04/12) · les demandes de test arrivent dans le tableau Gold Nord</div><!-- ============================================================
   GOLD NORD × BFMTV — Page de campagne « Météo S49 » (M11-goldnord-84)
-  Version : V1.7 · 24/11/2026 · demandes reliées au tableau Google Sheets « Gold Nord – Demandes kit BFMTV » · 15 agences · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
+  Version : V1.8 · 24/11/2026 · calculatrice « Estimer mon or » (tarifs Gold Nord) + menu latéral · demandes → Google Sheets · 15 agences · Metatrend (formulaire réorganisé : 1 = nom, e-mail, téléphone · 2 = adresse, CP + ville ; agences sans statut ouvert/fermé)
   À coller dans WordPress : bloc « HTML personnalisé » (ou widget HTML Elementor)
   sur une page vide (ex. goldnord.fr/bfmtv). Aucun fichier externe, aucune librairie.
   Tout est isolé : identifiant #gn84 et classes gn84-* (ne touche pas au thème).
@@ -219,6 +219,95 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 #gn84 .gn84-dialog .gn84-card{box-shadow:none;padding:18px;margin-top:40px}
 @keyframes gn84fade{from{opacity:0}to{opacity:1}}
 @keyframes gn84up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+/* ---------- MENU LATÉRAL ---------- */
+#gn84 .gn84-left{display:flex;align-items:center;gap:12px;min-width:0}
+#gn84 .gn84-menu-btn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 12px;border-radius:12px;border:1px solid var(--gn84-line);background:rgba(255,255,255,.04);color:var(--gn84-goldlt);font-weight:700;font-size:14px;cursor:pointer}
+#gn84 .gn84-menu-btn:hover{background:rgba(212,175,55,.1)}
+#gn84 .gn84-menu-btn span{display:none}
+#gn84 .gn84-drawer{position:fixed;inset:0;z-index:99998;visibility:hidden;pointer-events:none}
+#gn84 .gn84-drawer.gn84-open{visibility:visible;pointer-events:auto}
+#gn84 .gn84-drawer-bg{position:absolute;inset:0;background:rgba(10,8,6,.6);opacity:0;transition:opacity .25s ease}
+#gn84 .gn84-drawer.gn84-open .gn84-drawer-bg{opacity:1}
+#gn84 .gn84-drawer-panel{position:absolute;top:0;left:0;bottom:0;width:min(340px,86vw);background:radial-gradient(120% 60% at 0% 0%,#2e251a 0%,var(--gn84-ink) 65%);border-right:1px solid var(--gn84-line);color:var(--gn84-white);display:flex;flex-direction:column;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateX(-102%);transition:transform .3s cubic-bezier(.2,.8,.2,1);overflow-y:auto}
+#gn84 .gn84-drawer.gn84-open .gn84-drawer-panel{transform:none}
+#gn84 .gn84-drawer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+#gn84 .gn84-drawer-x{width:40px;height:40px;border-radius:50%;border:1px solid var(--gn84-line);background:rgba(255,255,255,.04);color:var(--gn84-goldlt);font-size:22px;cursor:pointer}
+#gn84 .gn84-dcalc{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:16px;border-radius:16px;border:1px solid rgba(212,175,55,.6);background:linear-gradient(135deg,rgba(212,175,55,.22),rgba(212,175,55,.06));color:var(--gn84-white);cursor:pointer;margin-bottom:14px}
+#gn84 .gn84-dcalc i{flex:none;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#e2c25a,#c9a03a);color:#15120e}
+#gn84 .gn84-dcalc b{display:block;font-size:16px}
+#gn84 .gn84-dcalc small{display:block;font-size:13px;color:#d8cfbf}
+#gn84 .gn84-new{font-style:normal;display:inline-block;margin-left:6px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#15120e;background:var(--gn84-goldlt);padding:2px 6px;border-radius:999px;vertical-align:middle}
+#gn84 .gn84-dnav{display:grid;gap:4px}
+#gn84 .gn84-dnav button,#gn84 .gn84-dnav a{display:flex;align-items:center;gap:12px;width:100%;padding:13px 10px;border:0;border-radius:12px;background:none;color:#efe7d8;font-size:15px;font-weight:600;text-align:left;cursor:pointer}
+#gn84 .gn84-dnav button:hover,#gn84 .gn84-dnav a:hover{background:rgba(212,175,55,.08)}
+#gn84 .gn84-dnav svg{color:var(--gn84-gold);flex:none}
+#gn84 .gn84-dfoot{margin-top:auto;padding-top:18px;border-top:1px solid var(--gn84-line)}
+#gn84 .gn84-dfoot .gn84-btn{min-height:50px;font-size:15px}
+#gn84 .gn84-dsoc{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+#gn84 .gn84-dsoc a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:12px;border:1px solid var(--gn84-line);color:var(--gn84-goldlt);font-size:14px;font-weight:700}
+/* ---------- LIENS CALCULATRICE ---------- */
+#gn84 .gn84-calc-link{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:10px 14px 10px 10px;border-radius:999px;border:1px solid rgba(212,175,55,.45);background:rgba(212,175,55,.08);color:#efe7d8;font-size:14px;cursor:pointer;text-align:left;max-width:100%}
+#gn84 .gn84-calc-link i{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#e2c25a,#c9a03a);color:#15120e}
+#gn84 .gn84-calc-link b{color:var(--gn84-goldlt)}
+#gn84 .gn84-calc-link:hover{background:rgba(212,175,55,.16)}
+#gn84 .gn84-s1head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:16px}
+#gn84 .gn84-s1head .gn84-note{margin-bottom:0}
+@media (max-width:520px){#gn84 .gn84-s1head{flex-direction:column;gap:10px}#gn84 .gn84-calc-pill{align-self:flex-start}}
+#gn84 .gn84-calc-pill{flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border-radius:999px;border:1.5px solid var(--gn84-gold2);background:#fff;color:#6b5113;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+#gn84 .gn84-calc-pill:hover{background:#fbf3dc}
+#gn84 .gn84-sticky{grid-template-columns:1fr auto auto}
+/* ---------- CALCULATRICE ---------- */
+#gn84 .gn84-calcm{position:fixed;inset:0;z-index:99999;display:none;align-items:flex-end;justify-content:center;background:rgba(10,8,6,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+#gn84 .gn84-calcm.gn84-open{display:flex;animation:gn84fade .2s ease}
+#gn84 .gn84-cpanel{position:relative;width:100%;max-width:560px;max-height:94vh;display:flex;flex-direction:column;background:var(--gn84-cream);border-radius:22px 22px 0 0;overflow:hidden;animation:gn84up .28s cubic-bezier(.2,.8,.2,1)}
+#gn84 .gn84-chead{position:relative;padding:18px 60px 16px 20px;background:radial-gradient(120% 120% at 100% 0%,#2e251a 0%,#15120e 70%);color:var(--gn84-white);border-bottom:1px solid var(--gn84-line)}
+#gn84 .gn84-chead h2{font-size:21px;line-height:1.2;font-weight:800;color:var(--gn84-white);margin:0 0 4px}
+#gn84 .gn84-chead p{font-size:13px;color:#d8cfbf}
+#gn84 .gn84-chead p b{color:var(--gn84-goldlt)}
+#gn84 .gn84-cbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 8px}
+#gn84 .gn84-cres{display:none;margin-bottom:16px;border-radius:18px;padding:18px;color:#fff;background:linear-gradient(135deg,#1f8a55 0%,#14663f 100%);box-shadow:0 14px 34px rgba(20,102,63,.3);position:relative;overflow:hidden}
+#gn84 .gn84-cres::after{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08)}
+#gn84 .gn84-has-res .gn84-cres{display:block;animation:gn84pop .45s cubic-bezier(.2,.8,.2,1)}
+#gn84 .gn84-cres-k{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c9f2da}
+#gn84 .gn84-cres-v{font-size:40px;line-height:1.1;font-weight:800;letter-spacing:-.01em;margin:6px 0 2px;color:#fff;white-space:nowrap}
+#gn84 .gn84-cres-s{font-size:14px;color:#e2f7ea}
+#gn84 .gn84-cres-d{margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2);font-size:13px;color:#d6f3e2;display:grid;gap:4px}
+#gn84 .gn84-cres-d span{display:flex;justify-content:space-between;gap:12px}
+#gn84 .gn84-ckit{display:none;margin-bottom:18px}
+#gn84 .gn84-has-res .gn84-ckit{display:block;animation:gn84pop .55s cubic-bezier(.2,.8,.2,1)}
+#gn84 .gn84-ckit-h{display:flex;align-items:center;gap:10px;margin:0 2px 10px}
+#gn84 .gn84-ckit-h i{flex:none;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--gn84-ink);color:var(--gn84-gold)}
+#gn84 .gn84-ckit-h b{display:block;font-size:16px;line-height:1.25}
+#gn84 .gn84-ckit-h small{display:block;font-size:13px;color:#6b665f}
+#gn84 .gn84-ckit .gn84-s1>h3,#gn84 .gn84-ckit .gn84-s1>.gn84-note{display:none}
+#gn84 .gn84-ckit .gn84-card{box-shadow:0 10px 30px rgba(21,18,14,.12);border:1px solid #ebe5da;max-width:none;padding:18px}
+#gn84 .gn84-citems-t{display:none;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#a8862a;margin:4px 2px 10px}
+#gn84 .gn84-has-res .gn84-citems-t{display:block}
+#gn84 .gn84-ctabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:#ebe4d6;margin-bottom:12px}
+#gn84 .gn84-ctabs button{min-height:42px;border:0;border-radius:11px;background:none;font-weight:700;font-size:14px;color:#6b665f;cursor:pointer}
+#gn84 .gn84-ctabs button.gn84-on{background:#fff;color:var(--gn84-ink);box-shadow:0 2px 8px rgba(21,18,14,.1)}
+#gn84 .gn84-crows{display:grid;gap:8px}
+#gn84 .gn84-crow{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;padding:12px;border-radius:14px;background:#fff;border:1.5px solid #ebe5da;transition:border-color .15s ease,box-shadow .15s ease}
+#gn84 .gn84-crow.gn84-filled{border-color:var(--gn84-gold);box-shadow:0 6px 18px rgba(212,175,55,.16)}
+#gn84 .gn84-cname{display:flex;align-items:center;gap:10px;min-width:0}
+#gn84 .gn84-ct{flex:none;min-width:46px;height:46px;padding:0 6px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--gn84-ink);color:var(--gn84-gold);font-weight:800;font-size:15px;line-height:1}
+#gn84 .gn84-ct small{font-size:9px;font-weight:700;color:#d8cfbf;margin-top:3px;letter-spacing:.04em}
+#gn84 .gn84-cname b{display:block;font-size:15px;line-height:1.2}
+#gn84 .gn84-cname em{display:block;font-style:normal;font-size:12px;color:#8b8680;line-height:1.3}
+#gn84 .gn84-cname span.gn84-cp{display:block;font-size:13px;font-weight:700;color:#8a6a1a}
+#gn84 .gn84-qty{display:flex;align-items:center;border:1.5px solid #d9d1c3;border-radius:12px;overflow:hidden;background:#fff}
+#gn84 .gn84-qty button{width:38px;height:44px;border:0;background:#f7f3ea;color:var(--gn84-ink);font-size:20px;font-weight:700;cursor:pointer}
+#gn84 .gn84-qty button:active{background:#efe6d2}
+#gn84 .gn84-qty input{width:58px;height:44px;border:0;text-align:center;font-size:17px;font-weight:700;outline:none;background:#fff;color:var(--gn84-ink);-moz-appearance:textfield}
+#gn84 .gn84-qty i{font-style:normal;font-size:12px;color:#8b8680;padding-right:8px;background:#fff}
+#gn84 .gn84-chint{display:flex;gap:8px;align-items:flex-start;margin:12px 2px 4px;font-size:13px;color:#6b665f}
+#gn84 .gn84-chint svg{flex:none;color:#a8862a;margin-top:1px}
+#gn84 .gn84-cdisc{font-size:11.5px;color:#8b8680;margin:12px 2px 4px;line-height:1.45}
+#gn84 .gn84-cfoot{padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #ebe5da;box-shadow:0 -8px 24px rgba(21,18,14,.06)}
+#gn84 .gn84-cfoot .gn84-btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none}
+#gn84 .gn84-has-res .gn84-cfoot{display:none}
+#gn84 .gn84-cx{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:50%;border:1px solid var(--gn84-line);background:rgba(255,255,255,.06);color:var(--gn84-goldlt);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+@keyframes gn84pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
 /* ---------- DESKTOP ---------- */
 @media (min-width:820px){
 #gn84 .gn84-hero{padding:34px 0 64px}
@@ -243,6 +332,10 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 #gn84 .gn84-dialog{border-radius:22px;padding:28px}
 #gn84 .gn84-dialog .gn84-ctas{grid-template-columns:1fr}
 #gn84 .gn84-sticky{display:none}
+#gn84 .gn84-menu-btn span{display:inline}
+#gn84 .gn84-calcm{align-items:center}
+#gn84 .gn84-cpanel{border-radius:22px;max-height:90vh}
+#gn84 .gn84-cres-v{font-size:46px}
 }
 @media (prefers-reduced-motion:reduce){#gn84 *{animation:none!important;transition:none!important}}
 </style>
@@ -258,6 +351,12 @@ var GN84_CONFIG = {
   sendPartial: false,              /* true = envoyer aussi l'étape 1 (prénom, tél, e-mail, CP) */
   thankYouUrl: "/demo/goldnord-bfmtv/merci/",    /* page de remerciement (fichier M11-goldnord-84_merci). Utilisée dès que l'endpoint est réglé. Vide = message dans la page */
   instagramUrl: "https://www.instagram.com/goldnord",
+  /* Calculatrice : tarifs de rachat Gold Nord (€ net, vente en ligne). Sur goldnord.fr, la page les relit
+     automatiquement sur calcPricesUrl (même site) ; sinon ces valeurs de secours sont utilisées. */
+  calcPricesUrl: "/estimer-mon-or/",
+  calcPrices: { date: "24/11/2026",
+    gold: { "24": 102.26, "22": 80.14, "18": 65.92, "14": 52.97, "9": 31.97 },
+    coins: { fr10: 289.73, fr20: 596.13, mx50: 3668.5, us20: 2970.24, us10: 1479.91 } },
   facebookUrl: "https://www.facebook.com/GoldNord/",
   phone: "03 27 59 80 76",
   logoUrl: "https://goldnord.fr/wp-content/uploads/2023/02/logo-goldnord-1.png",
@@ -271,7 +370,7 @@ var GN84_CONFIG = {
   /* Noms des événements : à aligner sur ceux de RERP (Pixel Meta / GA4 / GTM) */
   events: {
     popupView:"gn84_popup_view", kitClick:"gn84_kit_click", agencyClick:"gn84_agency_click",
-    step1:"gn84_lead_step1", lead:"generate_lead", fbLead:"Lead", fbAgency:"FindLocation", social:"gn84_social_click"
+    step1:"gn84_lead_step1", lead:"generate_lead", fbLead:"Lead", fbAgency:"FindLocation", social:"gn84_social_click", calcOpen:"gn84_calc_open", calcResult:"gn84_calc_result", fbCalc:"EstimationOr"
   }
 };
 /* ================= AGENCES (source : goldnord.fr/contact, lue le 24/11/2026) ================= */
@@ -319,6 +418,11 @@ phone:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="curre
 loc:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>',
 clock:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
 check:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+calc:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/></svg>',
+menu:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>',
+info:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
+steps:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h6"/></svg>',
+faq:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.4M12 17h.01"/></svg>',
 gift:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 13h18M12 9v12"/><path d="M12 9c-2-4-6-4-6-1.5S9 9 12 9c3 0 6-.5 6-1.5S14 5 12 9z"/></svg>',
 shield:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>',
 users:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6.5 6.5 0 0 1 3.5 6"/></svg>',
@@ -330,12 +434,12 @@ var HERO_ART='<svg viewBox="0 0 380 300" fill="none" stroke-linecap="round" stro
 function socialHtml(){return '<p class="gn84-social-t">Suivez Gold Nord pendant que votre kit arrive :</p><div class="gn84-social"><a href="'+esc(C.instagramUrl)+'" target="_blank" rel="noopener" data-gn84-soc="instagram">'+I.cam+' Instagram</a><a href="'+esc(C.facebookUrl)+'" target="_blank" rel="noopener" data-gn84-soc="facebook">'+I.fb+' Facebook</a></div>'}
 function logoHtml(){return '<span class="gn84-logo">'+(C.logoUrl?'<img src="'+esc(C.logoUrl)+'" alt="" onerror="this.style.display=\'none\'">':'')+'<span class="gn84-word">GOLD NORD</span></span>'}
 /* ---- Formulaire (2 étapes) ---- */
-function formHtml(id){return ''+
+function formHtml(id,o){o=o||{};return ''+
 '<div class="gn84-card"><form class="gn84-form" id="'+id+'" novalidate>'+
 (C.endpoint?'':'<div class="gn84-test">MODE TEST : aucune donnée n’est envoyée tant que l’adresse d’envoi (endpoint) n’est pas réglée.</div>')+
 '<div class="gn84-progress"><span class="gn84-sp gn84-sp1"><b>1</b>Vos coordonnées</span><i class="gn84-sline"></i><span class="gn84-sp gn84-sp2"><b>2</b>Livraison</span></div>'+
 '<div class="gn84-s1">'+
-'<h3>Votre kit postal gratuit</h3><p class="gn84-note">Reçu chez vous, sans frais et sans engagement.</p>'+
+(o.noCalc?'<h3>Votre kit postal gratuit</h3><p class="gn84-note">Reçu chez vous, sans frais et sans engagement.</p>':'<div class="gn84-s1head"><div><h3>Votre kit postal gratuit</h3><p class="gn84-note">Reçu chez vous, sans frais et sans engagement.</p></div><button type="button" class="gn84-calc-pill" data-gn84="calc" data-gn84-pos="formulaire">'+I.calc+' Estimer mon or</button></div>')+
 '<div class="gn84-row2"><label class="gn84-f"><span>Prénom</span><input name="prenom" autocomplete="given-name" required><em>Indiquez votre prénom.</em></label>'+
 '<label class="gn84-f"><span>Nom</span><input name="nom" autocomplete="family-name" required><em>Indiquez votre nom.</em></label></div>'+
 '<label class="gn84-f"><span>E-mail</span><input name="email" type="email" inputmode="email" autocomplete="email" required><em>Adresse e-mail invalide.</em></label>'+
@@ -350,6 +454,7 @@ function formHtml(id){return ''+
 '<label class="gn84-f"><span>Adresse</span><input name="adresse" autocomplete="address-line1" required><em>Indiquez votre adresse.</em></label>'+
 '<div class="gn84-row2"><label class="gn84-f"><span>Code postal</span><input name="code_postal" inputmode="numeric" maxlength="5" autocomplete="postal-code" required><em>5 chiffres.</em></label>'+
 '<label class="gn84-f"><span>Ville</span><input name="ville" autocomplete="address-level2" required><em>Indiquez la ville.</em></label></div>'+
+'<input type="hidden" name="estimation" value="">'+
 '<input class="gn84-hp" name="site_web" tabindex="-1" autocomplete="off" aria-hidden="true">'+
 '<button type="submit" class="gn84-btn gn84-btn-gold">'+I.kit+' Recevoir mon kit gratuit</button>'+
 '<button type="button" class="gn84-back">← Modifier mes informations</button>'+
@@ -432,14 +537,43 @@ var FAQ=[
 ["Que se passe-t-il après l’estimation ?","Vous recevez notre offre par e-mail et la consultez dans votre espace client. Si vous l’acceptez, vous êtes payé par virement ou par chèque. Si vous la refusez, vos bijoux vous sont retournés (retour gratuit au-delà de 500 € d’estimation, voir conditions)."],
 ["Je préfère venir en agence, c’est possible ?","Bien sûr : nos experts vous reçoivent dans nos "+N+" agences en France, avec estimation devant vous."]
 ];
+function drawerHtml(){return '<div class="gn84-drawer" aria-hidden="true"><div class="gn84-drawer-bg" data-gn84="menuclose"></div><nav class="gn84-drawer-panel" aria-label="Menu">'+
+'<div class="gn84-drawer-top">'+logoHtml()+'<button class="gn84-drawer-x" type="button" data-gn84="menuclose" aria-label="Fermer le menu">×</button></div>'+
+'<button class="gn84-dcalc" type="button" data-gn84="calc" data-gn84-pos="menu"><i>'+I.calc+'</i><span><b>Combien vaut mon or ?<em class="gn84-new">Calculatrice</em></b><small>Estimation immédiate aux tarifs Gold Nord du jour</small></span></button>'+
+'<div class="gn84-dnav"><button type="button" data-gn84="kit">'+I.kit+' Recevoir mon kit gratuit</button><button type="button" data-gn84="agence">'+I.pin+' Trouver une agence</button><button type="button" data-gn84="go" data-gn84-to="#gn84-kit">'+I.steps+' Comment ça marche</button><button type="button" data-gn84="go" data-gn84-to="#gn84-faq">'+I.faq+' Questions fréquentes</button></div>'+
+'<div class="gn84-dfoot"><a class="gn84-btn gn84-btn-line" href="'+tel(C.phone)+'">'+I.phone+' '+esc(C.phone)+'</a><div class="gn84-dsoc"><a href="'+esc(C.instagramUrl)+'" target="_blank" rel="noopener" data-gn84-soc="instagram">'+I.cam+' Instagram</a><a href="'+esc(C.facebookUrl)+'" target="_blank" rel="noopener" data-gn84-soc="facebook">'+I.fb+' Facebook</a></div></div>'+
+'</nav></div>'}
+var CALC_GOLD=[["24","24 carats","Or pur 999 · lingots, pièces"],["22","22 carats","Or 916 · bijoux orientaux"],["18","18 carats","Or 750 · le plus courant en France"],["14","14 carats","Or 585 · bijoux étrangers"],["9","9 carats","Or 375 · bijoux anglais"]];
+var CALC_COINS=[["fr20","20 Francs","Napoléon · France"],["fr10","10 Francs","Demi-Napoléon · France"],["us20","20 Dollars","États-Unis"],["us10","10 Dollars","États-Unis"],["mx50","50 Pesos","Mexique"]];
+var PR={gold:{},coins:{},date:C.calcPrices.date};(function(){var k;for(k in C.calcPrices.gold)PR.gold[k]=C.calcPrices.gold[k];for(k in C.calcPrices.coins)PR.coins[k]=C.calcPrices.coins[k]})();
+function eur(n,d){return Number(n).toLocaleString("fr-FR",{minimumFractionDigits:d==null?2:d,maximumFractionDigits:d==null?2:d})+" €"}
+function calcRow(kind,r){var unit=kind==="gold"?"g":"u.",badge=kind==="gold"?'<span class="gn84-ct">'+r[0]+'<small>CARATS</small></span>':'<span class="gn84-ct">'+I.calc.replace('width="20" height="20"','width="20" height="20"')+'</span>';
+if(kind==="coins")badge='<span class="gn84-ct" style="font-size:12px">'+esc(r[1].split(" ")[0])+'<small>'+esc(r[1].split(" ")[1].toUpperCase())+'</small></span>';
+return '<div class="gn84-crow" data-k="'+kind+'" data-id="'+r[0]+'"><div class="gn84-cname">'+badge+'<div><b>'+esc(kind==="gold"?"Or "+r[1]:"Pièce "+r[1])+'</b><em>'+esc(r[2])+'</em><span class="gn84-cp" data-cp="'+kind+':'+r[0]+'"></span></div></div>'+
+'<div class="gn84-qty"><button type="button" data-gn84c="-" aria-label="Moins">−</button><input type="text" inputmode="decimal" value="" placeholder="0" aria-label="'+esc(kind==="gold"?"Poids en grammes, or "+r[1]:"Nombre de pièces "+r[1])+'"><i>'+unit+'</i><button type="button" data-gn84c="+" aria-label="Plus">+</button></div></div>'}
+function calcHtml(){return '<div class="gn84-calcm" role="dialog" aria-modal="true" aria-labelledby="gn84-ct"><div class="gn84-cpanel">'+
+'<div class="gn84-chead"><h2 id="gn84-ct">Combien vaut votre or&nbsp;?</h2><p>Tarifs de rachat Gold Nord <b class="gn84-cdate"></b> · montant net à percevoir</p><button class="gn84-cx" type="button" aria-label="Fermer">×</button></div>'+
+'<div class="gn84-cbody">'+
+'<div class="gn84-cres" aria-live="polite"><p class="gn84-cres-k">'+I.check.replace('stroke="#d4af37"','stroke="#c9f2da"').replace('width="30" height="30"','width="18" height="18"')+' Votre estimation</p><p class="gn84-cres-v">0,00 €</p><p class="gn84-cres-s">net à percevoir*, payé par virement ou chèque</p><div class="gn84-cres-d"></div></div>'+
+'<div class="gn84-ckit"><div class="gn84-ckit-h"><i>'+I.kit+'</i><div><b>Encaissez cette somme : recevez votre kit postal gratuit</b><small>Envoi assuré jusqu’à 5 000 € · sans engagement</small></div></div>'+formHtml("gn84-form-calc",{noCalc:true})+'</div>'+
+'<p class="gn84-citems-t">Vos objets · modifiables</p>'+
+'<div class="gn84-ctabs" role="tablist"><button type="button" class="gn84-on" data-gn84tab="gold">Bijoux &amp; or</button><button type="button" data-gn84tab="coins">Pièces d’or</button></div>'+
+'<div class="gn84-crows" data-pane="gold">'+CALC_GOLD.map(function(r){return calcRow("gold",r)}).join("")+'</div>'+
+'<div class="gn84-crows" data-pane="coins" hidden>'+CALC_COINS.map(function(r){return calcRow("coins",r)}).join("")+'</div>'+
+'<p class="gn84-chint">'+I.info+'<span>Vous ne connaissez pas le carat&nbsp;? Choisissez <b>18 carats</b>, le plus courant en France. Nos experts vérifient chaque bijou.</span></p>'+
+'<p class="gn84-cdisc">*Estimation indicative calculée avec les tarifs de rachat en ligne Gold Nord du jour, nets de taxes. Le montant définitif vous est confirmé après expertise de vos bijoux.</p>'+
+'</div>'+
+'<div class="gn84-cfoot"><button type="button" class="gn84-btn gn84-btn-gold gn84-cgo" disabled>Voir mon estimation</button></div>'+
+'</div></div>'}
 root.innerHTML=''+
 '<section class="gn84-hero"><div class="gn84-wrap">'+
-'<div class="gn84-top">'+logoHtml()+'<a class="gn84-call" href="'+tel(C.phone)+'">'+esc(C.phone)+'</a></div>'+
+'<div class="gn84-top"><div class="gn84-left"><button class="gn84-menu-btn" type="button" data-gn84="menu" aria-label="Ouvrir le menu">'+I.menu+'<span>Menu</span></button>'+logoHtml()+'</div><a class="gn84-call" href="'+tel(C.phone)+'">'+esc(C.phone)+'</a></div>'+
 '<div class="gn84-hero-grid"><div>'+
 '<p class="gn84-badge">Vu dans la météo de BFMTV</p>'+
 '<h1>Votre or s’estime <span class="gn84-gold">depuis chez vous.</span></h1>'+
 '<p class="gn84-lead">Recevez votre kit postal gratuit, partout en France. Ou rencontrez nos experts dans l’une de nos '+N+' agences.</p>'+
 '<div class="gn84-ctas"><button class="gn84-btn gn84-btn-gold" data-gn84="kit">'+I.kit+' Recevoir mon kit gratuit</button><button class="gn84-btn gn84-btn-line" data-gn84="agence">'+I.pin+' Trouver une agence</button></div>'+
+'<button class="gn84-calc-link" type="button" data-gn84="calc" data-gn84-pos="hero"><i>'+I.calc+'</i><span>Combien vaut votre or&nbsp;? <b>Calculez-le en 30&nbsp;secondes</b></span></button>'+
 '<div class="gn84-trust"><span>Estimation gratuite et sans engagement</span><span>Envoi assuré jusqu’à 5 000 €</span><span>Entreprise 100 % française</span></div>'+
 '</div><div class="gn84-art">'+HERO_ART+'</div></div>'+
 '</div></section>'+
@@ -462,13 +596,14 @@ root.innerHTML=''+
 '<p class="gn84-msg" aria-live="polite"></p><div class="gn84-list"></div><button class="gn84-btn gn84-btn-line gn84-more" type="button" hidden></button></div></div>'+
 '<div class="gn84-kitbox"><div class="gn84-kitbox-t"><span class="gn84-kitbox-i">'+I.kit+'</span><div><h3>Pas d’agence près de chez vous ?</h3><p>Le kit postal gratuit vient à vous, partout en France.</p></div></div><button class="gn84-btn gn84-btn-gold" data-gn84="kit">'+I.kit+' Recevoir mon kit gratuit</button></div>'+
 '</div></section>'+
-'<section class="gn84-sec gn84-alt"><div class="gn84-wrap"><p class="gn84-kicker">Questions fréquentes</p><h2>Vous vous demandez…</h2><div class="gn84-faq">'+
+'<section class="gn84-sec gn84-alt" id="gn84-faq"><div class="gn84-wrap"><p class="gn84-kicker">Questions fréquentes</p><h2>Vous vous demandez…</h2><div class="gn84-faq">'+
 FAQ.map(function(f){return '<details><summary>'+esc(f[0])+'</summary><p>'+esc(f[1])+'</p></details>'}).join("")+
 '</div></div></section>'+
 '<section class="gn84-sec gn84-darksec gn84-final"><div class="gn84-wrap"><p class="gn84-kicker">Gold Nord</p><h2>Votre or mérite d’être bien estimé.</h2><p class="gn84-sub" style="margin:0 auto">Estimation gratuite et sans engagement, depuis chez vous ou en agence.</p>'+
 '<div class="gn84-ctas"><button class="gn84-btn gn84-btn-gold" data-gn84="kit">'+I.kit+' Recevoir mon kit gratuit</button><button class="gn84-btn gn84-btn-line" data-gn84="agence">'+I.pin+' Trouver une agence</button></div></div></section>'+
 '<p class="gn84-legal">Gold Nord · Entreprise 100 % française · <a href="'+esc(C.legalUrl)+'">Mentions légales</a> · <a href="'+esc(C.privacyUrl)+'">Confidentialité</a></p>'+
-'<div class="gn84-sticky"><button class="gn84-btn gn84-btn-gold" data-gn84="kit">'+I.kit+' Mon kit gratuit</button><button class="gn84-btn gn84-btn-line" data-gn84="agence" aria-label="Trouver une agence">'+I.pin+'</button></div>'+
+'<div class="gn84-sticky"><button class="gn84-btn gn84-btn-gold" data-gn84="kit">'+I.kit+' Mon kit gratuit</button><button class="gn84-btn gn84-btn-line" data-gn84="calc" data-gn84-pos="barre" aria-label="Calculer la valeur de mon or">'+I.calc+'</button><button class="gn84-btn gn84-btn-line" data-gn84="agence" aria-label="Trouver une agence">'+I.pin+'</button></div>'+
+drawerHtml()+calcHtml()+
 '<div class="gn84-modal" role="dialog" aria-modal="true" aria-labelledby="gn84-mt"><div class="gn84-dialog">'+
 '<button class="gn84-x" type="button" aria-label="Fermer">×</button>'+
 '<div class="gn84-pop-home"><div class="gn84-tv">'+I.tv+'<p>Vous nous avez vus dans la météo de BFMTV ?</p></div>'+
@@ -488,12 +623,47 @@ document.addEventListener("keydown",function(e){if(!modal.classList.contains("gn
 if(e.key==="Tab"){var f=$$("button,input,a,select",modal).filter(function(x){return x.offsetParent!==null});if(!f.length)return;var a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
 function goAgencies(){closeModal();var s=$("#gn84-agences");if(s)s.scrollIntoView({behavior:"smooth",block:"start"});setTimeout(function(){var i=$(".gn84-cp");if(i)i.focus({preventScroll:true})},500)}
 root.addEventListener("click",function(e){var b=e.target.closest("[data-gn84]");if(b&&b!==root){var k=b.getAttribute("data-gn84");
+if(k==="menu"){openDrawer();return}if(k==="menuclose"){closeDrawer();return}
+if(k==="calc"){openCalc(b.getAttribute("data-gn84-pos")||"menu");return}
+if(k==="go"){closeDrawer();var tg=$(b.getAttribute("data-gn84-to"));if(tg)tg.scrollIntoView({behavior:"smooth",block:"start"});return}
+if(drawer.classList.contains("gn84-open"))closeDrawer();
+if(calcm.classList.contains("gn84-open")&&(k==="kit"||k==="agence"))closeCalc();
 if(k==="kit"||k==="popkit"){track(C.events.kitClick,{position:k==="popkit"?"popup":"page"});if(k==="popkit"||window.innerWidth<820)openModal("form");else{$("#gn84-form-page input").focus();$("#gn84-kit").scrollIntoView({behavior:"smooth"})}}
 if(k==="agence"||k==="popagence"){track(C.events.agencyClick,{position:k==="popagence"?"popup":"page",action:"ouvrir"},C.events.fbAgency,true);goAgencies()}return}
 var pin=e.target.closest(".gn84-pin");if(pin){pickCity(pin.getAttribute("data-city"));return}
 var so=e.target.closest("[data-gn84-soc]");if(so){track(C.events.social,{reseau:so.getAttribute("data-gn84-soc"),position:"confirmation"});return}
 var a=e.target.closest("[data-gn84-ag]");if(a)track(C.events.agencyClick,{action:a.getAttribute("data-gn84-act"),agence:a.getAttribute("data-gn84-ag")},C.events.fbAgency,true)});
 if(!(C.popupOncePerSession&&store("gn84_pop"))){setTimeout(function(){if(!modal.classList.contains("gn84-open")){openModal("home");store("gn84_pop","1");track(C.events.popupView,{})}},C.popupDelayMs)}
+/* ---- Menu latéral ---- */
+var drawer=$(".gn84-drawer");
+function openDrawer(){drawer.classList.add("gn84-open");drawer.setAttribute("aria-hidden","false");document.documentElement.style.overflow="hidden";setTimeout(function(){var b=$(".gn84-dcalc");if(b)b.focus()},50)}
+function closeDrawer(){drawer.classList.remove("gn84-open");drawer.setAttribute("aria-hidden","true");if(!calcm.classList.contains("gn84-open")&&!modal.classList.contains("gn84-open"))document.documentElement.style.overflow=""}
+/* ---- Calculatrice ---- */
+var calcm=$(".gn84-calcm"),cpanel=$(".gn84-cpanel"),cbody=$(".gn84-cbody"),cgo=$(".gn84-cgo"),shown=false,cformEst=$("#gn84-form-calc").elements.estimation;
+function num(v){v=String(v||"").replace(",",".").replace(/[^\d.]/g,"");var n=parseFloat(v);return isFinite(n)&&n>0?Math.min(n,100000):0}
+function fmtIn(n,k){return n?(k==="gold"?String(Math.round(n*100)/100).replace(".",","):String(Math.round(n))):""}
+function paintPrices(){$(".gn84-cdate").textContent=PR.live?"du jour":"du "+PR.date;$$("[data-cp]").forEach(function(e){var a=e.getAttribute("data-cp").split(":");var v=a[0]==="gold"?PR.gold[a[1]]:PR.coins[a[1]];e.textContent=v?(eur(v)+(a[0]==="gold"?" / g":" / pièce")):""})}
+function lines(){var L=[];$$(".gn84-crow",calcm).forEach(function(row){var k=row.getAttribute("data-k"),id=row.getAttribute("data-id"),q=num($("input",row).value),pr=k==="gold"?PR.gold[id]:PR.coins[id];row.classList.toggle("gn84-filled",q>0);if(q>0&&pr){var lab=k==="gold"?("Or "+id+" ct · "+fmtIn(q,k)+" g"):((row.querySelector("b").textContent.replace("Pièce ",""))+" × "+fmtIn(q,k));L.push({lab:lab,v:q*pr})}});return L}
+function total(L){return L.reduce(function(a,l){return a+l.v},0)}
+function refresh(){var L=lines(),t=total(L);cgo.disabled=!(t>0);cgo.textContent=t>0?"Voir mon estimation ("+L.length+(L.length>1?" objets)":" objet)"):"Voir mon estimation";if(shown)render(L,t,false)}
+function render(L,t,anim){var v=$(".gn84-cres-v",calcm);$(".gn84-cres-d",calcm).innerHTML=L.map(function(l){return '<span><em style="font-style:normal">'+esc(l.lab)+'</em><b>'+eur(l.v)+'</b></span>'}).join("");
+var txt=eur(t)+" ("+L.map(function(l){return l.lab}).join(" ; ")+") · tarifs "+(PR.live?"du jour":"du "+PR.date);cformEst.value=t>0?txt:"";
+if(anim&&!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)){var t0=null;(function st(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/900),e=1-Math.pow(1-k,3);v.textContent=eur(t*e);if(k<1)requestAnimationFrame(st)})(performance.now())}else v.textContent=eur(t)}
+function showResult(){var L=lines(),t=total(L);if(!(t>0))return;shown=true;cpanel.classList.add("gn84-has-res");render(L,t,true);cbody.scrollTo?cbody.scrollTo({top:0,behavior:"smooth"}):(cbody.scrollTop=0);
+track(C.events.calcResult,{value:Math.round(t),currency:"EUR",objets:L.length},C.events.fbCalc,true);setTimeout(function(){var i=$("#gn84-form-calc input[name=prenom]");if(i&&window.innerWidth>=820)i.focus({preventScroll:true})},600)}
+function openCalc(pos){closeDrawer();if(modal.classList.contains("gn84-open"))closeModal();calcm.classList.add("gn84-open");document.documentElement.style.overflow="hidden";track(C.events.calcOpen,{position:pos||"page"});setTimeout(function(){var i=$('.gn84-crow[data-id="18"] input',calcm);if(i&&window.innerWidth>=820)i.focus()},80)}
+function closeCalc(){calcm.classList.remove("gn84-open");if(!drawer.classList.contains("gn84-open")&&!modal.classList.contains("gn84-open"))document.documentElement.style.overflow=""}
+calcm.addEventListener("click",function(e){if(e.target===calcm){closeCalc();return}var b=e.target.closest("[data-gn84c]");if(b){var row=b.closest(".gn84-crow"),k=row.getAttribute("data-k"),inp=$("input",row),q=num(inp.value)+(b.getAttribute("data-gn84c")==="+"?1:-1);inp.value=fmtIn(Math.max(0,q),k);refresh();return}
+var tb=e.target.closest("[data-gn84tab]");if(tb){var w=tb.getAttribute("data-gn84tab");$$("[data-gn84tab]",calcm).forEach(function(x){x.classList.toggle("gn84-on",x===tb)});$$("[data-pane]",calcm).forEach(function(p){p.hidden=p.getAttribute("data-pane")!==w})}});
+calcm.addEventListener("input",function(e){if(e.target.closest(".gn84-qty")){e.target.value=e.target.value.replace(/[^\d.,]/g,"").slice(0,7);refresh()}});
+$(".gn84-cx",calcm).addEventListener("click",closeCalc);cgo.addEventListener("click",showResult);
+document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;if(calcm.classList.contains("gn84-open"))closeCalc();if(drawer.classList.contains("gn84-open"))closeDrawer()});
+paintPrices();
+(function(){if(!C.calcPricesUrl)return;var u;try{u=new URL(C.calcPricesUrl,location.href)}catch(e){return}if(u.origin!==location.origin)return;
+fetch(u.href,{credentials:"same-origin"}).then(function(r){return r.ok?r.text():""}).then(function(h){if(!h)return;var t=new DOMParser().parseFromString(h,"text/html").body.textContent.replace(/\s+/g," "),g={},c={},ok=0,m;
+["24","22","18","14","9"].forEach(function(k){m=t.match(new RegExp("(?:^|[^0-9])"+k+" ?carats? ?([0-9]+(?:[.,][0-9]+)?) ?€ ?/ ?g","i"));if(m){g[k]=parseFloat(m[1].replace(",","."));ok++}});
+[["fr10","FR 10 francs"],["fr20","FR 20 francs"],["mx50","MX 50 pes+os"],["us20","US 20 dollars"],["us10","US 10 dollars"]].forEach(function(p){m=t.match(new RegExp(p[1]+" ?([0-9]+(?:[.,][0-9]+)?) ?€","i"));if(m)c[p[0]]=parseFloat(m[1].replace(",","."))});
+if(ok===5){PR.gold=g;for(var k in c)PR.coins[k]=c[k];PR.live=true;paintPrices();refresh()}}).catch(function(){})})();
 /* ---- Agences : interactions ---- */
 renderAgencies(null,"");
 $(".gn84-go").addEventListener("click",function(){findByCP($(".gn84-cp").value)});
@@ -538,6 +708,7 @@ var sticky=$(".gn84-sticky"),hero=$(".gn84-hero");
 function onScroll(){var r=hero.getBoundingClientRect();sticky.classList.toggle("gn84-show",r.bottom<0)}window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 })();
 </script>
+
 
 
 
