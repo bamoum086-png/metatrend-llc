@@ -63,7 +63,7 @@ font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Ari
 /* ---------- AIDE ---------- */
 #gn84t .gn84t-help{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;max-width:620px;margin:0 auto}
 #gn84t .gn84t-helpt{text-align:center;color:#5d5852;margin:-12px auto 20px;max-width:520px}
-#gn84t .gn84t-legal{font-size:12px;color:#8b8680;text-align:center;padding:18px 20px;background:var(--t-ink)}
+#gn84t .gn84t-legal{font-size:12px;line-height:1.7;color:#8b8680;text-align:center;padding:22px 20px;background:var(--t-ink)}
 #gn84t .gn84t-legal a{text-decoration:underline}
 @keyframes gn84tdraw{to{stroke-dashoffset:0}}
 @media (min-width:820px){
@@ -138,7 +138,7 @@ I.tick+
 '<a class="gn84t-btn gn84t-btn-gold" href="'+tel(C.phone)+'" data-gn84t="call">'+I.phone+' Appeler le '+esc(C.phone)+'</a>'+
 '<a class="gn84t-btn gn84t-btn-line" href="'+esc(C.agenciesUrl)+'" data-gn84t="agency">'+I.pin+' Trouver une agence</a>'+
 '</div></div></section>'+
-'<p class="gn84t-legal">Gold Nord · Entreprise 100 % française · <a href="'+esc(C.homeUrl)+'">goldnord.fr</a> · <a href="'+esc(C.legalUrl)+'">Mentions légales</a> · <a href="'+esc(C.privacyUrl)+'">Confidentialité</a></p>';
+'<p class="gn84t-legal"><a href="'+esc(C.homeUrl)+'">goldnord.fr</a> · <a href="'+esc(C.legalUrl)+'">Mentions légales</a> · <a href="'+esc(C.privacyUrl)+'">Confidentialité</a> · <a href="https://goldnord.fr/politique-de-cookies-ue/">Cookies</a><br>Rachat d’or : pièce d’identité obligatoire · paiement par virement ou chèque · 48 h de rétractation après signature du contrat.<br>© '+new Date().getFullYear()+' GOLD NORD · SARL au capital de 49 000 € · 85 bis avenue de France, 59600 Maubeuge · RCS Valenciennes 492 735 741 · Tous droits réservés.</p>';
 track(C.events.view,{lead:store("gn84_lead")==="1"?"oui":"non"});
 root.addEventListener("click",function(e){var a=e.target.closest("[data-gn84t]");if(!a)return;var k=a.getAttribute("data-gn84t");
 if(k==="instagram"||k==="facebook")track(C.events.social,{reseau:k,position:"merci"});
