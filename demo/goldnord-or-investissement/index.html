@@ -1,0 +1,455 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Or d’investissement · Gold Nord (démo)</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"></head><body style="margin:0;background:#f5f3f0"><!-- ================= GOLD NORD · Or d'investissement · M11-goldnord-92 · V1 (27/11/2026) =================
+     Bloc autonome (HTML + CSS + JS, sans bibliothèque). Tout est isolé sous #gn92 / gn92-*.
+     Réglages : uniquement dans GN92_CONFIG (en bas). Conception et réalisation : Meta trend LLC. -->
+<div id="gn92">
+<style>
+#gn92{--ink:#15120e;--ink2:#211c16;--gold:#d4af37;--gold2:#c9a961;--goldlt:#f0dc9a;--cream:#f5f3f0;--white:#fffbf7;--gray:#8b8680;--line:rgba(212,175,55,.28);--r:16px;font-family:"Montserrat","Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--cream);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#gn92 *{box-sizing:border-box}
+#gn92 a{color:inherit}
+#gn92 button{font:inherit;cursor:pointer}
+#gn92 .gn92-wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+#gn92 .gn92-demo{background:#7a1f1f;color:#fff;text-align:center;font-size:13px;padding:7px 12px;font-weight:600}
+#gn92 .gn92-hdr{position:sticky;top:0;z-index:40;background:rgba(21,18,14,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+#gn92 .gn92-hdr .gn92-wrap{display:flex;align-items:center;gap:16px;height:68px}
+#gn92 .gn92-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+#gn92 .gn92-logo img{height:38px;width:auto;display:block}
+#gn92 .gn92-word{font-weight:800;letter-spacing:.18em;font-size:18px;background:linear-gradient(90deg,#b8902e,#f3dc8c,#c9a03a);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+#gn92 .gn92-nav{display:flex;gap:4px;margin-left:auto}
+#gn92 .gn92-nav a{color:#e9e2d6;text-decoration:none;font-size:14px;font-weight:600;padding:8px 12px;border-radius:999px;white-space:nowrap}
+#gn92 .gn92-nav a:hover{color:var(--goldlt)}
+#gn92 .gn92-nav a.gn92-on{color:var(--ink);background:linear-gradient(90deg,#c9a03a,#f0dc9a)}
+#gn92 .gn92-cartbtn{position:relative;flex:none;display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--line);color:var(--goldlt);border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px}
+#gn92 .gn92-cartbtn b{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:11px;background:var(--gold);color:var(--ink);font-size:12px;padding:0 6px}
+#gn92 .gn92-menu{display:none;background:none;border:1px solid var(--line);color:var(--goldlt);border-radius:10px;width:42px;height:42px;flex:none}
+@media (max-width:899px){#gn92 .gn92-nav{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--ink);padding:10px 20px 18px;border-bottom:1px solid var(--line)}#gn92 .gn92-nav.gn92-open{display:flex}#gn92 .gn92-menu{display:inline-grid;place-items:center;margin-left:auto}#gn92 .gn92-cartbtn span{display:none}}
+#gn92 .gn92-hero{background:radial-gradient(1200px 500px at 80% 0%,#2a2218 0%,var(--ink) 60%);color:var(--white);padding:56px 0 64px}
+#gn92 .gn92-hgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+@media (max-width:899px){#gn92 .gn92-hgrid{grid-template-columns:1fr;gap:28px}#gn92 .gn92-hero{padding:36px 0 44px}}
+#gn92 .gn92-kicker{color:var(--gold2);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:12px;margin:0 0 12px}
+#gn92 h1{font-size:clamp(30px,4.6vw,50px);line-height:1.08;margin:0 0 16px;font-weight:800;letter-spacing:-.01em}
+#gn92 h1 em{font-style:normal;background:linear-gradient(90deg,#c9a03a,#f3dc8c);-webkit-background-clip:text;background-clip:text;color:transparent}
+#gn92 .gn92-lead{color:#d8d0c3;font-size:17px;margin:0 0 24px;max-width:560px}
+#gn92 .gn92-cta{display:flex;flex-wrap:wrap;gap:12px}
+#gn92 .gn92-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 24px;font-weight:700;font-size:15px;text-decoration:none;background:linear-gradient(90deg,#c9a03a,#f0dc9a,#c9a03a);color:var(--ink);box-shadow:0 8px 24px rgba(212,175,55,.25)}
+#gn92 .gn92-btn:disabled{opacity:.5;cursor:not-allowed}
+#gn92 .gn92-btn.gn92-ghost{background:transparent;color:var(--goldlt);border:1px solid var(--line);box-shadow:none}
+#gn92 .gn92-btn.gn92-dark{background:var(--ink);color:var(--goldlt);box-shadow:none}
+#gn92 .gn92-trust{display:flex;flex-wrap:wrap;gap:10px 18px;margin:26px 0 0;padding:0;list-style:none;font-size:13px;color:#cfc6b8}
+#gn92 .gn92-trust li{display:flex;align-items:center;gap:8px}
+#gn92 .gn92-trust i{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block}
+#gn92 .gn92-pcard{background:linear-gradient(180deg,#221c15,#18140f);border:1px solid var(--line);border-radius:22px;padding:24px}
+#gn92 .gn92-pcard h3{margin:0 0 4px;font-size:15px;color:var(--goldlt);display:flex;align-items:center;gap:8px}
+#gn92 .gn92-live{width:9px;height:9px;border-radius:50%;background:#3ccf6e;box-shadow:0 0 0 0 rgba(60,207,110,.6);animation:gn92pulse 2s infinite}
+#gn92 .gn92-live.gn92-off{background:#c9a03a;animation:none}
+@keyframes gn92pulse{0%{box-shadow:0 0 0 0 rgba(60,207,110,.55)}70%{box-shadow:0 0 0 9px rgba(60,207,110,0)}100%{box-shadow:0 0 0 0 rgba(60,207,110,0)}}
+#gn92 .gn92-prow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 12px}
+#gn92 .gn92-pbox{background:rgba(255,255,255,.04);border:1px solid rgba(212,175,55,.16);border-radius:14px;padding:12px}
+#gn92 .gn92-pbox small{display:block;color:#a89f92;font-size:12px}
+#gn92 .gn92-pbox strong{display:block;font-size:17px;color:var(--white);margin-top:2px;white-space:nowrap}
+@media (max-width:420px){#gn92 .gn92-prow{grid-template-columns:1fr 1fr}#gn92 .gn92-pbox:last-child{grid-column:span 2}}
+#gn92 .gn92-psrc{font-size:12px;color:#8f877b;margin:0}
+#gn92 .gn92-sec{padding:64px 0}
+#gn92 .gn92-sec h2{font-size:clamp(24px,3.2vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+#gn92 .gn92-sub{color:#5d5750;margin:0 0 28px;max-width:720px}
+#gn92 .gn92-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:22px}
+#gn92 .gn92-tabs{display:flex;gap:6px;background:#ebe6df;padding:5px;border-radius:999px}
+#gn92 .gn92-tabs button{border:0;background:transparent;padding:9px 16px;border-radius:999px;font-weight:700;font-size:14px;color:#5d5750}
+#gn92 .gn92-tabs button.gn92-on{background:var(--ink);color:var(--goldlt)}
+#gn92 select,#gn92 input,#gn92 textarea{font:inherit;font-size:15px;color:var(--ink);background:#fff;border:1px solid #d8d1c6;border-radius:12px;padding:12px 14px;width:100%}
+#gn92 select:focus,#gn92 input:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+#gn92 .gn92-sort{width:auto;min-width:200px}
+#gn92 .gn92-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+#gn92 .gn92-card{background:#fff;border:1px solid #e6dfd4;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+#gn92 .gn92-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(21,18,14,.1)}
+#gn92 .gn92-vis{background:radial-gradient(circle at 50% 35%,#2b241b,#15120e 75%);height:170px;display:grid;place-items:center;position:relative}
+#gn92 .gn92-vis svg{width:68%;height:auto;max-height:140px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))}
+#gn92 .gn92-tag{position:absolute;top:12px;left:12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:rgba(240,220,154,.14);color:var(--goldlt);border:1px solid var(--line)}
+#gn92 .gn92-stock{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:#1f3d29;color:#9fe3b4}
+#gn92 .gn92-stock.gn92-no{background:#3d1f1f;color:#f1a7a7}
+#gn92 .gn92-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+#gn92 .gn92-body h3{font-size:16px;margin:0;line-height:1.3}
+#gn92 .gn92-spec{font-size:13px;color:var(--gray);margin:0}
+#gn92 .gn92-price{font-size:22px;font-weight:800;margin:8px 0 0}
+#gn92 .gn92-prime{font-size:12px;color:var(--gray);margin:0}
+#gn92 .gn92-add{display:flex;gap:8px;margin-top:auto;padding-top:12px}
+#gn92 .gn92-qty{display:flex;align-items:center;border:1px solid #d8d1c6;border-radius:999px;overflow:hidden;flex:none}
+#gn92 .gn92-qty button{border:0;background:#f3efe9;width:34px;height:42px;font-size:18px;font-weight:700}
+#gn92 .gn92-qty input{border:0;border-radius:0;width:38px;text-align:center;padding:0;height:42px;-moz-appearance:textfield}
+#gn92 .gn92-qty input::-webkit-inner-spin-button{-webkit-appearance:none}
+#gn92 .gn92-add .gn92-btn{flex:1;padding:10px 14px;font-size:14px}
+#gn92 .gn92-note{font-size:12px;color:var(--gray);margin:18px 0 0}
+#gn92 .gn92-alt{background:#fff}
+#gn92 .gn92-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+@media (max-width:899px){#gn92 .gn92-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:519px){#gn92 .gn92-steps{grid-template-columns:1fr}}
+#gn92 .gn92-step{background:var(--cream);border-radius:var(--r);padding:20px;border:1px solid #ece5da}
+#gn92 .gn92-step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--goldlt);font-weight:800;margin-bottom:12px}
+#gn92 .gn92-step h3{margin:0 0 6px;font-size:16px}
+#gn92 .gn92-step p{margin:0;font-size:14px;color:#5d5750}
+#gn92 .gn92-track{background:var(--ink);color:var(--white)}
+#gn92 .gn92-track .gn92-sub{color:#cfc6b8}
+#gn92 .gn92-tgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:start}
+@media (max-width:899px){#gn92 .gn92-tgrid{grid-template-columns:1fr}}
+#gn92 .gn92-tform{display:grid;gap:12px;background:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:22px}
+#gn92 .gn92-tform label{font-size:13px;color:#cfc6b8;font-weight:600;display:grid;gap:6px}
+#gn92 .gn92-tres{background:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:22px;min-height:120px}
+#gn92 .gn92-tres h3{margin:0 0 4px;font-size:18px}
+#gn92 .gn92-tres .gn92-muted{color:#a89f92;font-size:14px;margin:0}
+#gn92 .gn92-tl{list-style:none;margin:18px 0 0;padding:0}
+#gn92 .gn92-tl li{position:relative;padding:0 0 18px 34px;color:#8f877b}
+#gn92 .gn92-tl li::before{content:"";position:absolute;left:8px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid #5a5248;background:var(--ink2)}
+#gn92 .gn92-tl li::after{content:"";position:absolute;left:14px;top:20px;bottom:0;width:2px;background:#3a332a}
+#gn92 .gn92-tl li:last-child::after{display:none}
+#gn92 .gn92-tl li.gn92-done{color:var(--white)}
+#gn92 .gn92-tl li.gn92-done::before{background:var(--gold);border-color:var(--gold)}
+#gn92 .gn92-tl li.gn92-done::after{background:var(--gold)}
+#gn92 .gn92-tl li.gn92-cur::before{box-shadow:0 0 0 5px rgba(212,175,55,.25)}
+#gn92 .gn92-tl b{display:block;font-size:15px}
+#gn92 .gn92-tl small{font-size:12px;color:#a89f92}
+#gn92 .gn92-err{color:#f1a7a7;font-size:13px;margin:0}
+#gn92 .gn92-faq details{background:#fff;border:1px solid #e6dfd4;border-radius:14px;padding:4px 18px;margin-bottom:10px}
+#gn92 .gn92-faq summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+#gn92 .gn92-faq summary::-webkit-details-marker{display:none}
+#gn92 .gn92-faq summary::after{content:"+";color:var(--gold2);font-size:20px;line-height:1}
+#gn92 .gn92-faq details[open] summary::after{content:"–"}
+#gn92 .gn92-faq p,#gn92 .gn92-faq ul{margin:0 0 14px;color:#4d4740;font-size:15px}
+#gn92 .gn92-foot{background:var(--ink);color:#a89f92;font-size:13px;padding:28px 0}
+#gn92 .gn92-foot .gn92-wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+#gn92 .gn92-foot a{color:#cfc6b8}
+#gn92 .gn92-ov{position:fixed;inset:0;background:rgba(10,8,6,.6);z-index:90;opacity:0;pointer-events:none;transition:opacity .2s}
+#gn92 .gn92-ov.gn92-show{opacity:1;pointer-events:auto}
+#gn92 .gn92-drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;z-index:95;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column}
+#gn92 .gn92-drawer.gn92-show{transform:none}
+#gn92 .gn92-dh{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #eee6da}
+#gn92 .gn92-dh h3{margin:0;font-size:18px}
+#gn92 .gn92-x{border:0;background:#f3efe9;width:38px;height:38px;border-radius:50%;font-size:20px;line-height:1}
+#gn92 .gn92-db{flex:1;overflow:auto;padding:16px 20px}
+#gn92 .gn92-line{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:12px 0;border-bottom:1px solid #f0ebe3}
+#gn92 .gn92-line h4{margin:0;font-size:14px}
+#gn92 .gn92-line .gn92-lp{font-weight:700;text-align:right}
+#gn92 .gn92-line .gn92-qty button{height:32px;width:30px}
+#gn92 .gn92-line .gn92-qty input{height:32px;width:32px}
+#gn92 .gn92-line .gn92-qty{justify-self:start}
+#gn92 .gn92-rm{border:0;background:none;color:var(--gray);font-size:12px;text-decoration:underline;padding:0;justify-self:end}
+#gn92 .gn92-df{padding:16px 20px;border-top:1px solid #eee6da;display:grid;gap:10px}
+#gn92 .gn92-tot{display:flex;justify-content:space-between;font-size:14px}
+#gn92 .gn92-tot.gn92-big{font-size:18px;font-weight:800}
+#gn92 .gn92-empty{text-align:center;color:var(--gray);padding:40px 0}
+#gn92 .gn92-modal{position:fixed;inset:0;z-index:96;display:grid;place-items:center;padding:16px;pointer-events:none;opacity:0;transition:opacity .2s}
+#gn92 .gn92-modal.gn92-show{pointer-events:auto;opacity:1}
+#gn92 .gn92-mbox{background:#fff;border-radius:22px;width:min(640px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:24px}
+@media (max-width:519px){#gn92 .gn92-modal{padding:0;align-items:end}#gn92 .gn92-mbox{border-radius:22px 22px 0 0;max-height:94vh;padding:20px 16px}}
+#gn92 .gn92-prog{display:flex;gap:6px;margin:0 0 18px}
+#gn92 .gn92-prog span{flex:1;height:5px;border-radius:3px;background:#ece5da}
+#gn92 .gn92-prog span.gn92-on{background:var(--gold)}
+#gn92 .gn92-f{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#gn92 .gn92-f .gn92-full{grid-column:1/-1}
+@media (max-width:519px){#gn92 .gn92-f{grid-template-columns:1fr}}
+#gn92 .gn92-f label{display:grid;gap:6px;font-size:13px;font-weight:600;color:#4d4740}
+#gn92 .gn92-f label.gn92-bad input,#gn92 .gn92-f label.gn92-bad select{border-color:#c0392b;background:#fff7f6}
+#gn92 .gn92-f label.gn92-opt{display:flex;gap:12px;align-items:flex-start;border:1px solid #e0d8cc;border-radius:14px;padding:14px;cursor:pointer;font-weight:500}
+#gn92 .gn92-opt input{width:auto;margin-top:3px}
+#gn92 .gn92-opt.gn92-sel{border-color:var(--gold);background:#fffaf0}
+#gn92 .gn92-f label.gn92-chk{display:flex;gap:10px;align-items:flex-start;font-weight:500}
+#gn92 .gn92-chk input{width:auto;margin-top:3px}
+#gn92 .gn92-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#gn92 .gn92-mact{display:flex;gap:10px;justify-content:space-between;margin-top:20px}
+#gn92 .gn92-recap{background:var(--cream);border-radius:14px;padding:14px;font-size:14px;margin-top:6px}
+#gn92 .gn92-ok{text-align:center}
+#gn92 .gn92-ok .gn92-num{display:inline-block;font-size:22px;font-weight:800;letter-spacing:.06em;background:var(--ink);color:var(--goldlt);padding:10px 18px;border-radius:12px;margin:10px 0}
+#gn92 .gn92-toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,30px);background:var(--ink);color:var(--goldlt);padding:12px 18px;border-radius:999px;font-size:14px;font-weight:600;z-index:99;opacity:0;transition:all .25s;pointer-events:none;border:1px solid var(--line);max-width:calc(100% - 32px);text-align:center}
+#gn92 .gn92-toast.gn92-show{opacity:1;transform:translate(-50%,0)}
+#gn92 .gn92-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<div class="gn92-demo" id="gn92-demo" hidden>Démo Metatrend · prix calculés sur le cours réel, primes indicatives · aucune commande n’est transmise à Gold Nord</div>
+<header class="gn92-hdr">
+ <div class="gn92-wrap">
+  <a class="gn92-logo" id="gn92-home" href="/"><img id="gn92-logoimg" alt="Gold Nord" width="120" height="38"><span class="gn92-word" id="gn92-word" hidden>GOLD NORD</span></a>
+  <nav class="gn92-nav" id="gn92-nav" aria-label="Navigation">
+   <a id="gn92-sell" href="/">Vendre mon or</a>
+   <a class="gn92-on" href="#gn92-catalogue" aria-current="page">Or d’investissement</a>
+   <a href="#gn92-suivi">Suivre ma commande</a>
+   <a href="#gn92-faq">Questions fréquentes</a>
+  </nav>
+  <button class="gn92-menu" id="gn92-menu" aria-label="Menu" aria-expanded="false">☰</button>
+  <button class="gn92-cartbtn" id="gn92-cartbtn" aria-label="Ouvrir le panier"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span>Panier</span><b id="gn92-count">0</b></button>
+ </div>
+</header>
+<section class="gn92-hero">
+ <div class="gn92-wrap gn92-hgrid">
+  <div>
+   <p class="gn92-kicker">Or d’investissement</p>
+   <h1>Investissez dans l’<em>or physique</em>, en toute sérénité</h1>
+   <p class="gn92-lead">Lingots et pièces d’or au cours du jour. Commandez en ligne, retirez dans l’une de nos agences ou recevez votre commande par envoi sécurisé, et suivez chaque étape.</p>
+   <div class="gn92-cta"><a class="gn92-btn" href="#gn92-catalogue">Voir les lingots et pièces</a><a class="gn92-btn gn92-ghost" href="#gn92-suivi">Suivre ma commande</a></div>
+   <ul class="gn92-trust">
+    <li><i></i>Or d’investissement exonéré de TVA</li>
+    <li><i></i><span id="gn92-nag">Retrait en agence</span></li>
+    <li><i></i>Envoi sécurisé</li>
+    <li><i></i>Entreprise 100 % française</li>
+   </ul>
+  </div>
+  <div class="gn92-pcard" aria-live="polite">
+   <h3><span class="gn92-live gn92-off" id="gn92-live"></span>Cours de l’or</h3>
+   <p class="gn92-psrc" id="gn92-ptime">Chargement…</p>
+   <div class="gn92-prow">
+    <div class="gn92-pbox"><small>Le gramme</small><strong id="gn92-pg">–</strong></div>
+    <div class="gn92-pbox"><small>L’once (31,1 g)</small><strong id="gn92-po">–</strong></div>
+    <div class="gn92-pbox"><small>Le kilo</small><strong id="gn92-pk">–</strong></div>
+   </div>
+   <p class="gn92-psrc" id="gn92-psrc">Cours au comptant (spot), en euros. À titre indicatif.</p>
+  </div>
+ </div>
+</section>
+<section class="gn92-sec" id="gn92-catalogue">
+ <div class="gn92-wrap">
+  <h2>Lingots et pièces d’or</h2>
+  <p class="gn92-sub">Les prix suivent le cours de l’or en temps réel. Le prix affiché comprend la prime de chaque produit.</p>
+  <div class="gn92-bar">
+   <div class="gn92-tabs" role="tablist" id="gn92-tabs">
+    <button class="gn92-on" data-f="all" role="tab" aria-selected="true">Tout</button>
+    <button data-f="lingot" role="tab" aria-selected="false">Lingots</button>
+    <button data-f="piece" role="tab" aria-selected="false">Pièces</button>
+   </div>
+   <label><span class="gn92-sr">Trier</span><select class="gn92-sort" id="gn92-sort"><option value="asc">Prix croissant</option><option value="desc">Prix décroissant</option><option value="weight">Poids d’or</option></select></label>
+  </div>
+  <div class="gn92-grid" id="gn92-grid"></div>
+  <p class="gn92-note" id="gn92-pnote"></p>
+ </div>
+</section>
+<section class="gn92-sec gn92-alt">
+ <div class="gn92-wrap">
+  <h2>Comment ça marche ?</h2>
+  <p class="gn92-sub">Une commande simple, suivie du début à la fin.</p>
+  <div class="gn92-steps">
+   <div class="gn92-step"><h3>Choisissez</h3><p>Sélectionnez vos lingots ou pièces. Le prix suit le cours de l’or du moment.</p></div>
+   <div class="gn92-step"><h3>Commandez</h3><p>Indiquez vos coordonnées et choisissez le retrait en agence ou l’envoi sécurisé.</p></div>
+   <div class="gn92-step"><h3>Réglez</h3><p>Un conseiller Gold Nord confirme votre commande. Vous réglez par virement bancaire.</p></div>
+   <div class="gn92-step"><h3>Suivez et recevez</h3><p>Avec votre numéro de commande, suivez chaque étape jusqu’à la remise de votre or.</p></div>
+  </div>
+ </div>
+</section>
+<section class="gn92-sec gn92-track" id="gn92-suivi">
+ <div class="gn92-wrap gn92-tgrid">
+  <div>
+   <p class="gn92-kicker">Suivi de commande</p>
+   <h2>Où en est ma commande ?</h2>
+   <p class="gn92-sub">Saisissez votre numéro de commande (reçu par e-mail) et l’adresse e-mail utilisée lors de la commande.</p>
+   <form class="gn92-tform" id="gn92-tform" novalidate>
+    <label>Numéro de commande<input id="gn92-tid" placeholder="GN-261127-ABCD" autocomplete="off" required></label>
+    <label>Adresse e-mail<input id="gn92-tmail" type="email" placeholder="vous@exemple.fr" autocomplete="email" required></label>
+    <p class="gn92-err" id="gn92-terr" hidden></p>
+    <button class="gn92-btn" type="submit">Suivre ma commande</button>
+   </form>
+  </div>
+  <div class="gn92-tres" id="gn92-tres"><h3>Votre suivi s’affichera ici</h3><p class="gn92-muted">Chaque changement d’étape vous est aussi signalé par e-mail.</p></div>
+ </div>
+</section>
+<section class="gn92-sec gn92-faq" id="gn92-faq">
+ <div class="gn92-wrap">
+  <h2>Questions fréquentes</h2>
+  <p class="gn92-sub">Tout savoir avant d’acheter de l’or d’investissement.</p>
+  <details><summary>Qu’est-ce que l’or d’investissement ?</summary><p>C’est une définition fiscale (article 298 sexdecies A du Code général des impôts) :</p><ul><li><b>Lingots et barres</b> : poids supérieur à 1 gramme, pureté égale ou supérieure à 995 millièmes.</li><li><b>Pièces</b> : pureté égale ou supérieure à 900 millièmes, frappées après 1800, ayant ou ayant eu cours légal dans leur pays d’origine, et habituellement vendues à un prix ne dépassant pas de plus de 80 % la valeur de l’or qu’elles contiennent.</li></ul></details>
+  <details><summary>Y a-t-il de la TVA ?</summary><p>Non. Les livraisons d’or d’investissement sont exonérées de TVA (article 298 sexdecies A du CGI). Votre facture mentionne les caractéristiques de chaque produit.</p></details>
+  <details><summary>Qu’est-ce que la prime ?</summary><p>La prime est l’écart entre le prix du produit et la valeur de l’or qu’il contient. Elle couvre la fabrication, la logistique et la garantie du produit. Elle est en général plus faible sur les gros lingots que sur les pièces.</p></details>
+  <details><summary>Comment se passe le paiement ?</summary><p>Après votre commande, un conseiller Gold Nord vous contacte pour la confirmer. Vous réglez ensuite par virement bancaire. Conformément à la réglementation (lutte contre le blanchiment, LCB-FT), une pièce d’identité peut vous être demandée.</p></details>
+  <details><summary>Comment suivre ma commande ?</summary><p>Votre numéro de commande vous est communiqué à la fin de la commande et par e-mail. Saisissez-le dans « Suivre ma commande » avec votre adresse e-mail pour voir l’étape en cours.</p></details>
+ </div>
+</section>
+<footer class="gn92-foot">
+ <div class="gn92-wrap">
+  <span id="gn92-copy">© GOLD NORD</span>
+  <span><a id="gn92-legal" href="#">Mentions légales</a> · <a id="gn92-privacy" href="#">Confidentialité</a> · <a id="gn92-cgv" href="#">CGV</a></span>
+  <span>Conception et réalisation : <a href="https://metatrendllc.com/" rel="noopener" target="_blank">Meta trend LLC</a></span>
+ </div>
+</footer>
+<div class="gn92-ov" id="gn92-ov"></div>
+<aside class="gn92-drawer" id="gn92-drawer" aria-label="Panier" aria-hidden="true">
+ <div class="gn92-dh"><h3>Votre panier</h3><button class="gn92-x" data-close aria-label="Fermer">×</button></div>
+ <div class="gn92-db" id="gn92-lines"></div>
+ <div class="gn92-df" id="gn92-dfoot">
+  <div class="gn92-tot"><span>Sous-total (or d’investissement, TVA 0 %)</span><b id="gn92-sub">0 €</b></div>
+  <p class="gn92-prime">Livraison choisie à l’étape suivante. Prix indicatif, confirmé par un conseiller.</p>
+  <button class="gn92-btn" id="gn92-checkout">Commander</button>
+ </div>
+</aside>
+<div class="gn92-modal" id="gn92-modal" role="dialog" aria-modal="true" aria-labelledby="gn92-mt">
+ <div class="gn92-mbox">
+  <div class="gn92-prog" id="gn92-prog"><span></span><span></span><span></span></div>
+  <form id="gn92-form" novalidate>
+   <div data-step="1">
+    <h3 id="gn92-mt" style="margin:0 0 14px">Vos coordonnées</h3>
+    <div class="gn92-f">
+     <label>Civilité<select name="civ" required><option value="">—</option><option>Madame</option><option>Monsieur</option></select></label>
+     <label>Prénom<input name="prenom" autocomplete="given-name" required></label>
+     <label>Nom<input name="nom" autocomplete="family-name" required></label>
+     <label>Téléphone<input name="tel" type="tel" autocomplete="tel" required></label>
+     <label class="gn92-full">E-mail<input name="email" type="email" autocomplete="email" required></label>
+     <label class="gn92-full">Adresse<input name="adresse" autocomplete="street-address" required></label>
+     <label>Code postal<input name="cp" inputmode="numeric" autocomplete="postal-code" required></label>
+     <label>Ville<input name="ville" autocomplete="address-level2" required></label>
+     <label class="gn92-hp" aria-hidden="true">Site<input name="site" tabindex="-1" autocomplete="off"></label>
+    </div>
+   </div>
+   <div data-step="2" hidden>
+    <h3 style="margin:0 0 14px">Livraison et paiement</h3>
+    <div class="gn92-f">
+     <label class="gn92-opt gn92-full gn92-sel"><input type="radio" name="livraison" value="agence" checked><span><b>Retrait en agence</b><br><small id="gn92-agnote">Gratuit · sur rendez-vous, avec une pièce d’identité</small></span></label>
+     <label class="gn92-full" id="gn92-agwrap">Agence de retrait<select name="agence" id="gn92-agsel" required></select></label>
+     <label class="gn92-opt gn92-full"><input type="radio" name="livraison" value="envoi"><span><b>Envoi sécurisé</b><br><small id="gn92-postnote">Tarif communiqué par votre conseiller</small></span></label>
+     <div class="gn92-full gn92-recap"><b>Paiement par virement bancaire.</b> Les coordonnées bancaires vous sont transmises par votre conseiller avec la confirmation de commande.</div>
+     <div class="gn92-full gn92-recap" id="gn92-recap"></div>
+     <label class="gn92-chk gn92-full"><input type="checkbox" name="cgv" required><span>J’accepte les <a id="gn92-cgv2" href="#" target="_blank" rel="noopener">conditions générales de vente</a> et le traitement de mes données pour la gestion de ma commande (<a id="gn92-privacy2" href="#" target="_blank" rel="noopener">confidentialité</a>).</span></label>
+    </div>
+   </div>
+   <div data-step="3" hidden class="gn92-ok">
+    <h3 style="margin:0">Merci, votre commande est enregistrée</h3>
+    <div class="gn92-num" id="gn92-onum">—</div>
+    <p>Conservez ce numéro : il vous permet de <a href="#gn92-suivi" data-close>suivre votre commande</a>. Un conseiller Gold Nord vous contacte pour la confirmer et vous transmettre les coordonnées de paiement.</p>
+   </div>
+   <p class="gn92-err" id="gn92-ferr" hidden style="color:#c0392b"></p>
+   <div class="gn92-mact" id="gn92-mact">
+    <button type="button" class="gn92-btn gn92-ghost" id="gn92-back" style="color:var(--ink)">Retour</button>
+    <button type="submit" class="gn92-btn" id="gn92-next">Continuer</button>
+   </div>
+  </form>
+ </div>
+</div>
+<div class="gn92-toast" id="gn92-toast" role="status"></div>
+<script>
+var GN92_CONFIG = {
+  version: "V1",
+  demo: true,                    /* true = bannière démo + commandes gardées dans le navigateur (rien n’est envoyé) */
+  orderEndpoint: "",             /* URL de l’application Apps Script (POST commande · GET ?action=track) — vide = mode démo */
+  metals: { url: "https://api.gold-api.com/price/XAU/EUR", source: "gold-api.com", refreshMs: 60000,
+    fallback: { date: "2026-11-25T13:47:46Z", XAU: 3174.77 } },
+  /* Primes INDICATIVES (démo) : à fixer par Gold Nord. fine = poids d’or fin en grammes. */
+  products: [
+    { id: "L5",   type: "lingot", name: "Lingot d’or 5 g",        spec: "Or fin 999,9 ‰", fine: 5,       prime: 0.07,  stock: true },
+    { id: "L10",  type: "lingot", name: "Lingot d’or 10 g",       spec: "Or fin 999,9 ‰", fine: 10,      prime: 0.055, stock: true },
+    { id: "L20",  type: "lingot", name: "Lingot d’or 20 g",       spec: "Or fin 999,9 ‰", fine: 20,      prime: 0.045, stock: true },
+    { id: "LOZ",  type: "lingot", name: "Lingot d’or 1 once",     spec: "31,10 g · Or fin 999,9 ‰", fine: 31.1035, prime: 0.04, stock: true },
+    { id: "L50",  type: "lingot", name: "Lingot d’or 50 g",       spec: "Or fin 999,9 ‰", fine: 50,      prime: 0.035, stock: true },
+    { id: "L100", type: "lingot", name: "Lingot d’or 100 g",      spec: "Or fin 999,9 ‰", fine: 100,     prime: 0.03,  stock: true },
+    { id: "L250", type: "lingot", name: "Lingot d’or 250 g",      spec: "Or fin 999,9 ‰", fine: 250,     prime: 0.025, stock: false },
+    { id: "L1K",  type: "lingot", name: "Lingot d’or 1 kg",       spec: "Or fin 999,9 ‰", fine: 1000,    prime: 0.02,  stock: true },
+    { id: "P20F", type: "piece",  name: "20 Francs Napoléon",     spec: "6,45 g · 900 ‰ · 5,81 g d’or fin", fine: 5.806, prime: 0.10, coin: "20 Francs", stock: true },
+    { id: "P20S", type: "piece",  name: "20 Francs Suisse",       spec: "6,45 g · 900 ‰ · 5,81 g d’or fin", fine: 5.806, prime: 0.11, coin: "Helvetia", stock: true },
+    { id: "PSOV", type: "piece",  name: "Souverain",              spec: "7,99 g · 916,7 ‰ · 7,32 g d’or fin", fine: 7.322, prime: 0.09, coin: "Souverain", stock: true },
+    { id: "PKRU", type: "piece",  name: "Krugerrand 1 once",      spec: "33,93 g · 916,7 ‰ · 31,10 g d’or fin", fine: 31.1035, prime: 0.05, coin: "Krugerrand", stock: true },
+    { id: "PMAP", type: "piece",  name: "Maple Leaf 1 once",      spec: "31,10 g · 999,9 ‰", fine: 31.1035, prime: 0.05, coin: "Maple Leaf", stock: true },
+    { id: "P50P", type: "piece",  name: "50 Pesos mexicains",     spec: "41,67 g · 900 ‰ · 37,50 g d’or fin", fine: 37.5, prime: 0.045, coin: "50 Pesos", stock: true }
+  ],
+  shipping: { agency: 0, post: null },   /* post : prix de l’envoi sécurisé en € (null = « communiqué par le conseiller ») */
+  maxQty: 20,
+  phone: "03 27 59 80 76",
+  logoUrl: "https://goldnord.fr/wp-content/uploads/2023/02/logo-goldnord-1.png",
+  homeUrl: "/", sellUrl: "/",
+  legalUrl: "https://goldnord.fr/mentions-legales/",
+  privacyUrl: "https://goldnord.fr/politique-de-confidentialite/",
+  cgvUrl: "",                            /* À FOURNIR : CGV de la vente en ligne */
+  company: "GOLD NORD · SARL au capital de 49 000 € · 85 bis avenue de France, 59600 Maubeuge · RCS Valenciennes 492 735 741",
+  events: { add: "gn92_add_to_cart", checkout: "gn92_begin_checkout", order: "gn92_order", track: "gn92_track" }
+};
+/* Agences : source goldnord.fr/contact (lue le 24/11/2026, même liste que gold-nord.com) */
+var GN92_AGENCIES = ["Beauvais","Béthune","Cambrai","Chaumont","Compiègne","Douai","Dourdan","Dreux","Fourmies","Lisieux","Maubeuge","Le Puy-en-Velay","Saint-Dizier","Saint-Quentin","Vitry-le-François"];
+(function(){
+var C=GN92_CONFIG,R=document.getElementById("gn92");if(!R)return;
+function $(s,c){return (c||R).querySelector(s)}function $$(s,c){return Array.prototype.slice.call((c||R).querySelectorAll(s))}
+var OZ=31.1034768,spot=null,spotT=null,live=false,filter="all",sort="asc",cart={},step=1,lastOrder=null;
+var store={get:function(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function eur(v,d){if(v==null||isNaN(v))return "–";try{return new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",minimumFractionDigits:d==null?2:d,maximumFractionDigits:d==null?2:d}).format(v)}catch(e){return v.toFixed(2)+" €"}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]})}
+function track(n,p){try{window.dataLayer=window.dataLayer||[];window.dataLayer.push(Object.assign({event:n},p||{}))}catch(e){}}
+function toast(t){var el=$("#gn92-toast");el.textContent=t;el.classList.add("gn92-show");clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove("gn92-show")},2200)}
+function prod(id){for(var i=0;i<C.products.length;i++)if(C.products[i].id===id)return C.products[i];return null}
+function price(p){return spot?Math.round(p.fine*(spot/OZ)*(1+p.prime)*100)/100:null}
+/* ---- en-tête, liens ---- */
+if(C.demo)$("#gn92-demo").hidden=false;
+var li=$("#gn92-logoimg");li.src=C.logoUrl;li.onerror=function(){li.remove();$("#gn92-word").hidden=false};
+$("#gn92-home").href=C.homeUrl;$("#gn92-sell").href=C.sellUrl;
+$("#gn92-legal").href=C.legalUrl;$("#gn92-privacy").href=C.privacyUrl;$("#gn92-privacy2").href=C.privacyUrl;
+$("#gn92-cgv").href=C.cgvUrl||C.legalUrl;$("#gn92-cgv2").href=C.cgvUrl||C.legalUrl;
+$("#gn92-copy").textContent="© "+C.company;
+$("#gn92-nag").textContent="Retrait dans nos "+GN92_AGENCIES.length+" agences";
+$("#gn92-agsel").innerHTML='<option value="">Choisir une agence</option>'+GN92_AGENCIES.map(function(a){return '<option>'+esc(a)+'</option>'}).join("");
+if(C.shipping.post!=null)$("#gn92-postnote").textContent=eur(C.shipping.post)+" · assuré, remis contre signature";
+$("#gn92-menu").onclick=function(){var n=$("#gn92-nav"),o=n.classList.toggle("gn92-open");this.setAttribute("aria-expanded",o)};
+$$("#gn92-nav a").forEach(function(a){a.addEventListener("click",function(){$("#gn92-nav").classList.remove("gn92-open")})});
+/* ---- visuels SVG ---- */
+function svgBar(p){var w=p.fine>=250?"1 kg":"";var lab=p.id==="LOZ"?"1 OZ":p.id==="L1K"?"1 KG":p.fine+" g";return '<svg viewBox="0 0 200 120" aria-hidden="true"><defs><linearGradient id="gb'+p.id+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7e3a1"/><stop offset=".45" stop-color="#d4af37"/><stop offset="1" stop-color="#9c7a22"/></linearGradient></defs><path d="M30 18h140l22 84H8z" fill="url(#gb'+p.id+')"/><path d="M42 28h116l14 64H28z" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"/><text x="100" y="58" text-anchor="middle" font-family="Montserrat,Arial" font-weight="800" font-size="18" fill="#5c4512">'+lab+'</text><text x="100" y="80" text-anchor="middle" font-family="Montserrat,Arial" font-weight="700" font-size="11" fill="#6e5518" letter-spacing="2">FINE GOLD 999.9</text></svg>'}
+function svgCoin(p){var t=(p.coin||p.name).toUpperCase();return '<svg viewBox="0 0 160 160" aria-hidden="true"><defs><radialGradient id="gc'+p.id+'" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fbe9ad"/><stop offset=".55" stop-color="#d4af37"/><stop offset="1" stop-color="#8f6d1c"/></radialGradient></defs><circle cx="80" cy="80" r="74" fill="url(#gc'+p.id+')"/><circle cx="80" cy="80" r="62" fill="none" stroke="rgba(92,69,18,.55)" stroke-width="2" stroke-dasharray="2 4"/><circle cx="80" cy="80" r="44" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"/><text x="80" y="76" text-anchor="middle" font-family="Montserrat,Arial" font-weight="800" font-size="12" fill="#5c4512">'+esc(t)+'</text><text x="80" y="94" text-anchor="middle" font-family="Montserrat,Arial" font-weight="700" font-size="10" fill="#6e5518">OR</text></svg>'}
+/* ---- catalogue ---- */
+function render(){var list=C.products.filter(function(p){return filter==="all"||p.type===filter});
+list.sort(function(a,b){if(sort==="weight")return a.fine-b.fine;var d=(a.fine*(1+a.prime))-(b.fine*(1+b.prime));return sort==="asc"?d:-d});
+$("#gn92-grid").innerHTML=list.map(function(p){var pr=price(p);return '<article class="gn92-card" data-id="'+p.id+'"><div class="gn92-vis"><span class="gn92-tag">'+(p.type==="lingot"?"Lingot":"Pièce")+'</span><span class="gn92-stock'+(p.stock?"":" gn92-no")+'">'+(p.stock?"En stock":"Sur commande")+'</span>'+(p.type==="lingot"?svgBar(p):svgCoin(p))+'</div><div class="gn92-body"><h3>'+esc(p.name)+'</h3><p class="gn92-spec">'+esc(p.spec)+'</p><p class="gn92-price" data-price>'+eur(pr)+'</p><p class="gn92-prime">dont prime '+(p.prime*100).toLocaleString("fr-FR",{maximumFractionDigits:1})+' % · TVA 0 %</p><div class="gn92-add"><div class="gn92-qty"><button type="button" data-d="-1" aria-label="Moins">−</button><input type="number" min="1" max="'+C.maxQty+'" value="1" aria-label="Quantité"><button type="button" data-d="1" aria-label="Plus">+</button></div><button type="button" class="gn92-btn" data-add>Ajouter</button></div></div></article>'}).join("");
+$("#gn92-pnote").textContent="Prix indicatifs calculés sur le cours de l’or"+(spotT?" du "+new Date(spotT).toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short"}):"")+(C.demo?" · primes de démonstration":"")+". Le prix définitif est confirmé par un conseiller Gold Nord."}
+function clampQ(v){v=parseInt(v,10);if(!(v>0))v=1;return Math.min(v,C.maxQty)}
+$("#gn92-grid").addEventListener("click",function(e){var card=e.target.closest(".gn92-card");if(!card)return;var inp=$("input",card);var d=e.target.getAttribute("data-d");if(d){inp.value=clampQ((parseInt(inp.value,10)||1)+parseInt(d,10));return}
+if(e.target.hasAttribute("data-add")){var id=card.getAttribute("data-id"),q=clampQ(inp.value);cart[id]=Math.min((cart[id]||0)+q,C.maxQty);save();drawCart();var p=prod(id);toast(q+" × "+p.name+" ajouté au panier");track(C.events.add,{item_id:id,item_name:p.name,quantity:q,value:price(p)*q})}});
+$("#gn92-tabs").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;filter=b.getAttribute("data-f");$$("#gn92-tabs button").forEach(function(x){var on=x===b;x.classList.toggle("gn92-on",on);x.setAttribute("aria-selected",on)});render()});
+$("#gn92-sort").onchange=function(){sort=this.value;render()};
+/* ---- cours ---- */
+function showSpot(){$("#gn92-pg").textContent=eur(spot/OZ);$("#gn92-po").textContent=eur(spot);$("#gn92-pk").textContent=eur(spot/OZ*1000,0);
+$("#gn92-live").classList.toggle("gn92-off",!live);$("#gn92-ptime").textContent=(live?"En direct · ":"Dernier cours connu · ")+new Date(spotT).toLocaleString("fr-FR",{dateStyle:"medium",timeStyle:"short"});
+$("#gn92-psrc").textContent="Cours au comptant (spot) sur le marché international, en euros. Source : "+C.metals.source+". À titre indicatif.";
+$$("#gn92-grid .gn92-card").forEach(function(c){$("[data-price]",c).textContent=eur(price(prod(c.getAttribute("data-id"))))});drawCart();
+var n=$("#gn92-pnote");if(n)render()}
+function fallback(){if(spot)return;spot=C.metals.fallback.XAU;spotT=Date.parse(C.metals.fallback.date);live=false;showSpot()}
+function load(){if(!window.fetch){fallback();return}var done=false,to=setTimeout(function(){if(!done){done=true;fallback()}},8000);
+fetch(C.metals.url,{cache:"no-store",credentials:"omit"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(j){if(done)return;done=true;clearTimeout(to);var p=Number(j.price);if(!(p>0))throw new Error("bad");spot=p;spotT=Date.parse(j.updatedAt)||Date.now();live=true;showSpot()}).catch(function(){if(!done){done=true;clearTimeout(to)}fallback()})}
+/* ---- panier ---- */
+function save(){store.set("gn92_cart",cart)}
+function lines(){return Object.keys(cart).filter(function(id){return prod(id)&&cart[id]>0}).map(function(id){var p=prod(id);return {id:id,name:p.name,qty:cart[id],unit:price(p),total:price(p)==null?null:Math.round(price(p)*cart[id]*100)/100}})}
+function subtotal(){return lines().reduce(function(s,l){return s+(l.total||0)},0)}
+function drawCart(){var L=lines(),n=L.reduce(function(s,l){return s+l.qty},0);$("#gn92-count").textContent=n;
+$("#gn92-lines").innerHTML=L.length?L.map(function(l){return '<div class="gn92-line" data-id="'+l.id+'"><h4>'+esc(l.name)+'</h4><span class="gn92-lp">'+eur(l.total)+'</span><div class="gn92-qty"><button type="button" data-d="-1" aria-label="Moins">−</button><input type="number" min="1" max="'+C.maxQty+'" value="'+l.qty+'" aria-label="Quantité"><button type="button" data-d="1" aria-label="Plus">+</button></div><button type="button" class="gn92-rm" data-rm>Retirer</button></div>'}).join(""):'<p class="gn92-empty">Votre panier est vide.</p>';
+$("#gn92-sub").textContent=eur(subtotal());$("#gn92-checkout").disabled=!L.length}
+$("#gn92-lines").addEventListener("click",function(e){var row=e.target.closest(".gn92-line");if(!row)return;var id=row.getAttribute("data-id");if(e.target.hasAttribute("data-rm")){delete cart[id]}else{var d=e.target.getAttribute("data-d");if(!d)return;cart[id]=clampQ(cart[id]+parseInt(d,10));if(cart[id]<1)delete cart[id]}save();drawCart()});
+$("#gn92-lines").addEventListener("change",function(e){var row=e.target.closest(".gn92-line");if(!row)return;cart[row.getAttribute("data-id")]=clampQ(e.target.value);save();drawCart()});
+function openDrawer(){$("#gn92-drawer").classList.add("gn92-show");$("#gn92-drawer").setAttribute("aria-hidden","false");$("#gn92-ov").classList.add("gn92-show")}
+function closeAll(){$("#gn92-drawer").classList.remove("gn92-show");$("#gn92-drawer").setAttribute("aria-hidden","true");$("#gn92-modal").classList.remove("gn92-show");$("#gn92-ov").classList.remove("gn92-show")}
+$("#gn92-cartbtn").onclick=openDrawer;$("#gn92-ov").onclick=closeAll;
+R.addEventListener("click",function(e){if(e.target.closest("[data-close]"))closeAll()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeAll()});
+/* ---- commande ---- */
+var F=$("#gn92-form");
+function setStep(s){step=s;$$("[data-step]",F).forEach(function(d){d.hidden=+d.getAttribute("data-step")!==s});$$("#gn92-prog span").forEach(function(x,i){x.classList.toggle("gn92-on",i<s)});
+$("#gn92-back").style.visibility=s===2?"visible":"hidden";$("#gn92-next").textContent=s===1?"Continuer":s===2?"Valider la commande":"Fermer";$("#gn92-ferr").hidden=true;if(s===2)recap();var b=$(".gn92-mbox");if(b)b.scrollTop=0}
+$("#gn92-checkout").onclick=function(){if(!lines().length)return;$("#gn92-toast").classList.remove("gn92-show");$("#gn92-drawer").classList.remove("gn92-show");$("#gn92-modal").classList.add("gn92-show");$("#gn92-ov").classList.add("gn92-show");setStep(1);track(C.events.checkout,{value:subtotal()});var f=$("input[name=prenom]",F);setTimeout(function(){f&&f.focus()},150)};
+$("#gn92-back").onclick=function(){setStep(1)};
+function delivery(){var v=($("input[name=livraison]:checked",F)||{}).value||"agence";return v}
+function shipCost(){return delivery()==="agence"?C.shipping.agency:C.shipping.post}
+function recap(){var L=lines(),sc=shipCost(),st=subtotal();$("#gn92-recap").innerHTML=L.map(function(l){return esc(l.qty+" × "+l.name)+' — <b>'+eur(l.total)+'</b>'}).join("<br>")+'<br>Livraison : <b>'+(sc==null?"selon tarif communiqué":sc===0?"gratuite":eur(sc))+'</b><br><span style="font-size:16px">Total indicatif : <b>'+eur(st+(sc||0))+'</b></span>';
+$("#gn92-agwrap").style.display=delivery()==="agence"?"":"none";$$(".gn92-opt",F).forEach(function(o){o.classList.toggle("gn92-sel",$("input",o).checked)})}
+F.addEventListener("change",function(e){$("#gn92-ferr").hidden=true;if(e.target.name==="livraison")recap();var l=e.target.closest("label");if(l)l.classList.remove("gn92-bad")});
+function check(s){var bad=[],box=$('[data-step="'+s+'"]',F);$$("input[required],select[required]",box).forEach(function(i){if(i.closest("#gn92-agwrap")&&delivery()!=="agence")return;var v=i.type==="checkbox"?i.checked:String(i.value).trim();var ok=!!v;if(ok&&i.type==="email")ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(i.value.trim());if(ok&&i.name==="cp")ok=/^\d{5}$/.test(i.value.trim());if(ok&&i.name==="tel")ok=i.value.replace(/\D/g,"").length>=9;var l=i.closest("label");if(l)l.classList.toggle("gn92-bad",!ok);if(!ok)bad.push(i)});
+if(bad.length){var e=$("#gn92-ferr");e.textContent=s===2&&bad.length===1&&bad[0].name==="cgv"?"Merci d’accepter les conditions générales de vente.":"Merci de vérifier les champs en rouge.";e.hidden=false;bad[0].focus();return false}return true}
+function oid(){var d=new Date(),p=function(n){return (n<10?"0":"")+n},a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",r="";for(var i=0;i<4;i++)r+=a[Math.floor(Math.random()*a.length)];return "GN-"+String(d.getFullYear()).slice(2)+p(d.getMonth()+1)+p(d.getDate())+"-"+r}
+function val(n){var i=$('[name="'+n+'"]',F);return i?String(i.value).trim():""}
+F.addEventListener("submit",function(e){e.preventDefault();if(step===3){closeAll();return}if(!check(step))return;if(step===1){setStep(2);return}
+if(val("site"))return;var sc=shipCost(),st=subtotal(),now=new Date().toISOString();
+var o={id:oid(),date:now,client:{civ:val("civ"),prenom:val("prenom"),nom:val("nom"),tel:val("tel"),email:val("email").toLowerCase(),adresse:val("adresse"),cp:val("cp"),ville:val("ville")},items:lines(),livraison:delivery(),agence:delivery()==="agence"?val("agence"):"",paiement:"virement",sousTotal:st,fraisLivraison:sc,total:st+(sc||0),cours:{XAU_EUR:spot,date:new Date(spotT).toISOString(),source:C.metals.source},status:"recue",history:[{s:"recue",t:now}],page:location.href};
+var btn=$("#gn92-next");btn.disabled=true;btn.textContent="Envoi…";
+function ok(){lastOrder=o;var all=store.get("gn92_orders")||[];all.push(o);store.set("gn92_orders",all);cart={};save();drawCart();$("#gn92-onum").textContent=o.id;btn.disabled=false;setStep(3);track(C.events.order,{transaction_id:o.id,value:o.total,currency:"EUR",items:o.items.map(function(l){return {item_id:l.id,item_name:l.name,quantity:l.qty,price:l.unit}})});$("#gn92-tid").value=o.id;$("#gn92-tmail").value=o.client.email}
+if(C.orderEndpoint&&!C.demo){fetch(C.orderEndpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"order",order:o})}).then(function(r){return r.json()}).then(function(j){if(!j||!j.ok)throw new Error("ko");if(j.id)o.id=j.id;ok()}).catch(function(){btn.disabled=false;btn.textContent="Valider la commande";var er=$("#gn92-ferr");er.textContent="La commande n’a pas pu être envoyée. Réessayez ou appelez-nous au "+C.phone+".";er.hidden=false})}else{setTimeout(ok,500)}});
+/* ---- suivi ---- */
+var ST=[["recue","Commande reçue","Nous avons bien reçu votre commande."],["confirmee","Commande confirmée","Votre conseiller a confirmé la commande et le prix."],["payee","Paiement reçu","Votre virement est arrivé."],["preparation","En préparation","Votre or est préparé et contrôlé."],["expediee","Expédiée","Votre colis sécurisé est en route.","Prête en agence","Votre or vous attend en agence, sur rendez-vous."],["livree","Livrée","Commande remise contre signature.","Retirée","Commande remise en agence."]];
+var DEMO={id:"GN-DEMO-0001",client:{email:"demo@goldnord.fr",prenom:"Claire"},livraison:"envoi",items:[{name:"Lingot d’or 1 once",qty:1}],status:"expediee",suivi:"",history:[{s:"recue",t:"2026-11-20T09:12:00Z"},{s:"confirmee",t:"2026-11-20T10:05:00Z"},{s:"payee",t:"2026-11-21T14:30:00Z"},{s:"preparation",t:"2026-11-22T09:00:00Z"},{s:"expediee",t:"2026-11-24T16:40:00Z"}]};
+function fmtD(t){try{return new Date(t).toLocaleString("fr-FR",{dateStyle:"medium",timeStyle:"short"})}catch(e){return ""}}
+function showTrack(o){var ag=o.livraison==="agence",cur=-1,h={};(o.history||[]).forEach(function(x){h[x.s]=x.t});ST.forEach(function(s,i){if(s[0]===o.status)cur=i});
+if(o.status==="annulee"){$("#gn92-tres").innerHTML='<h3>Commande '+esc(o.id)+'</h3><p class="gn92-muted">Cette commande a été annulée. Pour toute question : '+esc(C.phone)+'.</p>';return}
+$("#gn92-tres").innerHTML='<h3>Commande '+esc(o.id)+'</h3><p class="gn92-muted">'+esc((o.items||[]).map(function(l){return l.qty+" × "+l.name}).join(" · "))+(ag&&o.agence?" · Retrait à "+esc(o.agence):"")+'</p><ol class="gn92-tl">'+ST.map(function(s,i){var lab=ag&&s[3]?s[3]:s[1],txt=ag&&s[4]?s[4]:s[2];var cls=i<=cur?"gn92-done":"";if(i===cur)cls+=" gn92-cur";return '<li class="'+cls+'"><b>'+lab+'</b><small>'+(h[s[0]]?fmtD(h[s[0]])+" · ":"")+txt+'</small>'+(s[0]==="expediee"&&!ag&&o.suivi&&i<=cur?'<small> · N° de suivi : '+esc(o.suivi)+'</small>':"")+'</li>'}).join("")+'</ol>'}
+$("#gn92-tform").addEventListener("submit",function(e){e.preventDefault();var id=$("#gn92-tid").value.trim().toUpperCase(),m=$("#gn92-tmail").value.trim().toLowerCase(),er=$("#gn92-terr");er.hidden=true;
+if(!id||!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m)){er.textContent="Merci de saisir votre numéro de commande et votre e-mail.";er.hidden=false;return}
+track(C.events.track,{});
+function notFound(){er.textContent="Aucune commande ne correspond. Vérifiez le numéro et l’e-mail, ou appelez-nous au "+C.phone+".";er.hidden=false}
+if(C.orderEndpoint&&!C.demo){$("#gn92-tres").innerHTML='<p class="gn92-muted">Recherche…</p>';fetch(C.orderEndpoint+(C.orderEndpoint.indexOf("?")<0?"?":"&")+"action=track&id="+encodeURIComponent(id)+"&email="+encodeURIComponent(m),{credentials:"omit"}).then(function(r){return r.json()}).then(function(j){if(j&&j.ok&&j.order)showTrack(j.order);else{$("#gn92-tres").innerHTML="";notFound()}}).catch(function(){$("#gn92-tres").innerHTML="";er.textContent="Le suivi est momentanément indisponible. Réessayez dans quelques minutes.";er.hidden=false});return}
+var all=(store.get("gn92_orders")||[]).concat(lastOrder?[lastOrder]:[]).concat([DEMO]);var f=null;all.forEach(function(o){if(o.id===id&&o.client&&o.client.email===m)f=o});if(f)showTrack(f);else notFound()});
+/* ---- démarrage ---- */
+cart=store.get("gn92_cart")||{};Object.keys(cart).forEach(function(id){if(!prod(id))delete cart[id]});
+render();drawCart();load();if(C.metals.refreshMs)setInterval(load,C.metals.refreshMs);
+})();
+</script>
+</div>
+</body></html>
